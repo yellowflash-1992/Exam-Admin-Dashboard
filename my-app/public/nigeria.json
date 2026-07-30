@@ -1,0 +1,100 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+            "type": "Feature",
+            "properties": { "NAME_1": "Lagos" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [2.7, 6.2],
+                        [4.0, 6.2],
+                        [4.0, 7.0],
+                        [2.7, 7.0],
+                        [2.7, 6.2]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "NAME_1": "Oyo" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [3.0, 7.0],
+                        [4.5, 7.0],
+                        [4.5, 8.5],
+                        [3.0, 8.5],
+                        [3.0, 7.0]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "NAME_1": "Kano" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [7.5, 11.0],
+                        [9.5, 11.0],
+                        [9.5, 12.8],
+                        [7.5, 12.8],
+                        [7.5, 11.0]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "NAME_1": "FCT" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [6.5, 8.5],
+                        [8.0, 8.5],
+                        [8.0, 9.7],
+                        [6.5, 9.7],
+                        [6.5, 8.5]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "NAME_1": "Rivers" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [6.5, 4.5],
+                        [8.5, 4.5],
+                        [8.5, 6.2],
+                        [6.5, 6.2],
+                        [6.5, 4.5]
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": { "NAME_1": "Borno" },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [11.5, 10.5],
+                        [14.0, 10.5],
+                        [14.0, 13.5],
+                        [11.5, 13.5],
+                        [11.5, 10.5]
+                    ]
+                ]
+            }
+        }
+    ]
+}

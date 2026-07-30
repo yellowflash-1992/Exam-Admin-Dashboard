@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* 🌑 Core Theme */
+
+:root {
+    --background: #0B1220;
+    --foreground: #E5E7EB;
+    --card: #111827;
+    --card-foreground: #F9FAFB;
+    --primary: #3B82F6;
+    --secondary: #06B6D4;
+    --muted: #1A2332;
+    --border: rgba(255, 255, 255, 0.05);
+}
+
+
+/* Optional: Remove light mode completely */
+
+@media (prefers-color-scheme: light) {
+     :root {
+        --background: #0B1220;
+        --foreground: #E5E7EB;
+    }
+}
+
+
+/* Apply globally */
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+    font-family: var(--font-geist-sans);
+     background:
+  radial-gradient(circle at top right, rgba(34,211,238,.08), transparent 35%),
+  radial-gradient(circle at bottom left, rgba(59,130,246,.06), transparent 40%),
+  var(--background);
+}
+
+@layer components {
+    .card {
+        background: var(--card);
+        color: var(--card-foreground);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+    }
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+        transform: scale(1.02);
+    }
+}
+
+.svg-map {
+  width: 100%;
+  height: 100%;
+}
+
+.svg-map__location {
+  fill: #133b5c;
+  stroke: #0b1220;
+  stroke-width: 1;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.svg-map__location:hover {
+  fill: #22d3ee;
+}
+
+
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* * {
+  outline: 1px solid red;
+} */
+
+/* Force vertical scrollbar to always show */
+html {
+  overflow-y: scroll;
+   scrollbar-gutter: stable both-edges;
+}
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22D3EE;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #06B6D4;
+}
+
+/* Ensure content can scroll */
+body {
+  min-height: 100vh;
+  overflow-y: auto;
+}
