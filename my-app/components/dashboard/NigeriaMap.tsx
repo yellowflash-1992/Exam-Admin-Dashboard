@@ -52,7 +52,8 @@ export default function NigeriaMap() {
             zoom={1.89} 
 >
             <Geographies geography={geoData}>
-              {({ geographies }) =>
+  {({ geographies }: { geographies: any[] }) =>
+
                 geographies
                   .filter(geo => {
                     const name = geo.properties.name || geo.properties.NAME;
