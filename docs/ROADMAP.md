@@ -55,3 +55,6 @@
 - Responsive tables.
 - Responsive charts.
 - Backend integration (Node.js + Express).
+
+## keep learning from chatgpt:
+- using these words: "Remember that when we're coding, I prefer Build Mode: build first with short explanations. I'll use a separate chat for deep lessons."

@@ -6,3 +6,9 @@
 - Candidate profile picture
 - Bulk delete
 - Bulk import
+
+
+(git add .
+git commit -m "feat: enhance welcome dashboard card"
+
+git push origin main)

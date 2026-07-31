@@ -51,34 +51,47 @@ export default function WaecPage() {
 </div>
 
       {/* 🟣 ROW 2 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2fr_1.2fr_1.7fr] gap-4">
-        <WelcomeCard />
-        <TrackingCard />
-        <PerformanceCard />
-      </div>
+     <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
 
-      {/* 🟢 ROW 3 */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-stretch">
-        {/* Map (takes 2 columns) */}
-        <div className="lg:col-span-2">
-          <NigeriaMap />
-        </div>
-
-        {/* Active Users (takes 1 column) */}
-        <ActiveUsersCard />
-      </div>
-
-      {/* 🟣 ROW 4 */}
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-
-  <div className="lg:col-span-2">
-    <PerformanceChart />
+  <div className="lg:col-span-5">
+    <WelcomeCard />
   </div>
 
-  <RecentActivity />
+  <div className="lg:col-span-3">
+    <TrackingCard />
+  </div>
+
+  <div className="lg:col-span-4">
+    <PerformanceCard />
+  </div>
 
 </div>
 
+      {/* 🟢 ROW 3 */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+  <div className="lg:col-span-8">
+    <NigeriaMap />
+  </div>
+
+  <div className="lg:col-span-4">
+    <ActiveUsersCard />
+  </div>
+
+</div>
+
+      {/* 🟣 ROW 4 */}
+<div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+  <div className="lg:col-span-8">
+    <PerformanceChart />
+  </div>
+
+  <div className="lg:col-span-4">
+    <RecentActivity />
+  </div>
+
+</div>
     </div>
   );
 }

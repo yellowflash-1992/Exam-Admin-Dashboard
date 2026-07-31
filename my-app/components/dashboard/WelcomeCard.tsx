@@ -2,134 +2,100 @@ import {
   ArrowRight,
   CalendarDays,
   ShieldCheck,
+  Users,
+BookOpen,
+MapPinned,
 } from "lucide-react";
 
 export default function WelcomeCard() {
   return (
-    <div
-      className="
+    <div className="flex flex-col gap-3">
+
+      {/* TOP CARD */}
+
+      <div className="
       relative
+      rounded-3xl
       overflow-hidden
-      rounded-2xl
       border border-cyan-500/20
       bg-gradient-to-br
-     from-[#0F3D56]
-via-[#0B5CAD]
-to-[#112240]
-      p-5
-      min-h-[280px]
-      flex
-      flex-col
-      justify-between
-      "
-    >
-      {/* Decorative circles */}
+      from-[#0F3D56]
+      via-[#0B5CAD]
+      to-[#112240]
+      px-3
+  py-3
+      ">
 
-      <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-white/10 blur-xl" />
-      <div className="absolute right-10 bottom-0 w-32 h-32 rounded-full bg-cyan-300/10 blur-lg" />
+        {/* decoration */}
 
-      {/* Top */}
+        <div className="absolute -right-10 -top-10 w-20 h-30 rounded-full bg-white/10 blur-3xl" />
 
-      <div className="relative z-10">
+        <div className="relative z-10 flex justify-between">
 
-        <div className="flex items-center gap-2 text-cyan-100 text-sm">
+          {/* LEFT */}
 
-          <ShieldCheck size={16} />
+          <div>
 
-          National Examination Board
+            <div className="flex items-center gap-2 text-cyan-100">
+
+              <ShieldCheck size={16}/>
+
+              WAEC Administration
+
+            </div>
+
+            <h1 className="mt-3 text-4xl font-bold whitespace-nowrap flex items-center gap-2">
+  <span>Good Morning</span>
+
+  <span className="-translate-y-2 inline-block">
+    👋
+  </span>
+</h1>
+
+            <p className="mt-2 text-cyan-100">
+
+              1,203,421 candidates registered
+              for the 2026 examination cycle.
+
+            </p>
+
+          </div>
+
+          {/* RIGHT */}
+
+          <div className="text-right">
+
+            <p className="text-5xl font-bold">
+
+              08:42
+
+            </p>
+
+            <p>Friday</p>
+
+            <p className="text-sm">
+
+              Abuja • 28°C
+
+            </p>
+
+          </div>
 
         </div>
-
-    <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-400/15 px-3 py-1">
-
-    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"/>
-
-    <span className="text-xs text-emerald-200">
-        Live Monitoring Active
-    </span>
-
-</div>
-
-        <h1 className="mt-4 text-4xl font-bold leading-tight">
-          Welcome Back,
-          <br />
-          Super Admin 👋
-        </h1>
-
-        <p className="mt-4 max-w-md text-cyan-100">
-          Monitor candidates, examination centres,
-          nationwide performance and system activity
-          from one centralized dashboard.
-        </p>
 
       </div>
 
-      {/* Bottom */}
+      {/* BOTTOM CARD */}
 
-      <div className="relative z-10 flex items-end justify-between gap-4">
+      <div className="
+      rounded-3xl
+      border border-white/10
+      bg-white/5
+      backdrop-blur-md
+      p-5
+      ">
 
-        <div className="flex gap-2">
-
-  <div className="bg-white/10 backdrop-blur rounded-xl px-4 py-3">
-
-    <p className="text-xs text-cyan-100">
-      Active Exams
-    </p>
-
-    <h3 className="text-xl font-bold">
-      156
-    </h3>
-
-  </div>
-
-  <div className="bg-white/10 backdrop-blur rounded-xl px-2 py-2 ">
-
-    <p className="text-xs text-cyan-100">
-      Candidates
-    </p>
-
-    <h3 className="text-xl font-bold">
-      1.2M
-    </h3>
-
-  </div>
-
-</div>
-        <div className="flex gap-2">
-
-          <button
-            className="
-            flex items-center gap-2
-            rounded-xl
-            bg-white
-            text-slate-900
-            px-2 py-1 text-sm
-            font-medium
-            hover:scale-105
-            transition
-            "
-          >
-            View Reports
-
-            <ArrowRight size={18} />
-          </button>
-
-          <button
-            className="
-            rounded-xl
-            border
-            border-white/20
-            bg-white/10
-           px-3 py-2
-            backdrop-blur
-            hover:bg-white/20
-            transition
-            "
-          >
-            <CalendarDays size={18} />
-          </button>
-
-        </div>
+        Bottom Card Here
 
       </div>
 
