@@ -21,6 +21,29 @@ import {
 } from "lucide-react";
 export default function Sidebar() {
 
+//   const menu = [
+//   {
+//     title: "MAIN",
+//     items: [
+//       {
+//         name: "WAEC",
+//         href: "/waec",
+//         icon: GraduationCap,
+//       },
+//       {
+//         name: "Candidates",
+//         href: "/candidates",
+//         icon: Users,
+//       },
+//       {
+//         name: "JAMB",
+//         href: "/jamb",
+//         icon: BookOpen,
+//       },
+//     ],
+//   },
+// ];
+
   const menu = [
   {
     title: "MAIN",

@@ -16,7 +16,7 @@ export default function WelcomeCard() {
      from-[#0F3D56]
 via-[#0B5CAD]
 to-[#112240]
-      p-7
+      p-5
       min-h-[280px]
       flex
       flex-col
@@ -66,9 +66,9 @@ to-[#112240]
 
       {/* Bottom */}
 
-      <div className="relative z-10 flex items-end justify-between">
+      <div className="relative z-10 flex items-end justify-between gap-4">
 
-        <div className="flex gap-3">
+        <div className="flex gap-2">
 
   <div className="bg-white/10 backdrop-blur rounded-xl px-4 py-3">
 
@@ -82,7 +82,7 @@ to-[#112240]
 
   </div>
 
-  <div className="bg-white/10 backdrop-blur rounded-xl px-4 py-3">
+  <div className="bg-white/10 backdrop-blur rounded-xl px-2 py-2 ">
 
     <p className="text-xs text-cyan-100">
       Candidates
@@ -95,7 +95,7 @@ to-[#112240]
   </div>
 
 </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2">
 
           <button
             className="
@@ -103,7 +103,7 @@ to-[#112240]
             rounded-xl
             bg-white
             text-slate-900
-            px-3 py-2 text-sm
+            px-2 py-1 text-sm
             font-medium
             hover:scale-105
             transition
