@@ -5,6 +5,7 @@
 - Welcome Card
 - Tracking Card
 - Performance Card
+- Live Activity Card
 
 ## Concepts Used
 
@@ -21,4 +22,4 @@
 Completed
 
 Next Module:
-Live Activity Card
+performance chart
