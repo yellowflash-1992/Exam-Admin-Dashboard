@@ -1,12 +1,12 @@
-import Link from "next/link";
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import {
-  GraduationCap,
   BookOpen,
-  School,
-  ClipboardList,
   ChevronRight,
+  ClipboardList,
+  GraduationCap,
+  School,
 } from "lucide-react";
+import Link from "next/link";
 
 const exams = [
   {
@@ -88,13 +88,9 @@ export default function ExaminationsPage() {
                 />
               </div>
 
-              <h2 className="mt-5 text-2xl font-bold">
-                {exam.name}
-              </h2>
+              <h2 className="mt-5 text-2xl font-bold">{exam.name}</h2>
 
-              <p className="mt-2 text-sm opacity-70">
-                {exam.description}
-              </p>
+              <p className="mt-2 text-sm opacity-70">{exam.description}</p>
             </Link>
           );
         })}

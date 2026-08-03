@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { dashboardData } from "../data/dashboard";
+import { dashboardData } from "../../data/dashboard";
 
 // const data = [
 //   { month: "Jan", waec: 65, jamb: 58 },

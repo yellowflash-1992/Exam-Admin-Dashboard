@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
-import { dashboardData } from "../data/dashboard";
+import { dashboardData } from "../../data/dashboard";
 
 type PerformanceCardProps = {
   performance: typeof dashboardData.performance;

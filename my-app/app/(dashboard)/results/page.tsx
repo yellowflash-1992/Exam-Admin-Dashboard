@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 import ResultsStats from "@/components/results/ResultsStats";
 import { results } from "@/lib/data/results";
 

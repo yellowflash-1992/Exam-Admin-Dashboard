@@ -1,12 +1,12 @@
+import ActiveUsersCard from "@/components/examinations/waec/ActiveUserCard";
+import NigeriaMap from "@/components/examinations/waec/NigeriaMap";
+import PerformanceCard from "@/components/examinations/waec/PerformanceCard";
+import PerformanceChart from "@/components/examinations/waec/PerformanceChart";
+import RecentActivity from "@/components/examinations/waec/RecentActivity";
+import StatCard from "@/components/examinations/waec/StatCard";
+import TrackingCard from "@/components/examinations/waec/TrackingCard";
+import WelcomeCard from "@/components/examinations/waec/WelcomeCard";
 import { getDashboardData } from "@/components/services/dashboard";
-import StatCard from "@/components/dashboard/StatCard";
-import WelcomeCard from "@/components/dashboard/WelcomeCard";
-import TrackingCard from "@/components/dashboard/TrackingCard";
-import PerformanceCard from "@/components/dashboard/PerformanceCard";
-import ActiveUsersCard from "@/components/dashboard/ActiveUserCard";
-import NigeriaMap from "@/components/dashboard/NigeriaMap";
-import PerformanceChart from "@/components/dashboard/PerformanceChart";
-import RecentActivity from "@/components/dashboard/RecentActivity";
 
 export default async function NabtebPage() {
   const dashboard = await getDashboardData();

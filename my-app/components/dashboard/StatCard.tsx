@@ -1,51 +1,43 @@
-"use client";
-
-import { Award, Building2, FileCheck, TrendingUp, Users } from "lucide-react";
-
-const icons = {
-  users: Users,
-  building: Building2,
-  exam: FileCheck,
-  award: Award,
-};
+import { LucideIcon } from "lucide-react";
+import Card from "../ui/Card";
 
 interface StatCardProps {
   title: string;
-  value: string;
-  change: string;
-  icon: keyof typeof icons;
-  color: string;
+  value: string | number;
+  icon: LucideIcon;
+  color?: string;
 }
 
 export default function StatCard({
   title,
   value,
-  change,
-  icon,
-  color,
+  icon: Icon,
+  color = "bg-cyan-500",
 }: StatCardProps) {
-  const Icon = icons[icon];
-
   return (
-    <div className="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-3">
-      <div className="flex justify-between">
+    <Card hover>
+      <div className="flex items-center justify-between">
         <div>
-          <p>{title}</p>
-          <h2 className="text-3xl font-bold">{value}</h2>
+          <p className="text-sm opacity-60">{title}</p>
+
+          <h2 className="text-3xl font-bold mt-2">{value}</h2>
         </div>
 
         <div
-          className="w-12 h-12 rounded-xl flex items-center justify-center"
-          style={{ backgroundColor: color }}
+          className={`
+            ${color}
+            w-14
+            h-14
+            rounded-xl
+            flex
+            items-center
+            justify-center
+            text-white
+          `}
         >
-          <Icon className="text-white" size={22} />
+          <Icon size={26} />
         </div>
       </div>
-
-      <div className="flex items-center gap-2 mt-2 text-emerald-400">
-        <TrendingUp size={16} />
-        <span>{change}</span>
-      </div>
-    </div>
+    </Card>
   );
 }

@@ -26,7 +26,9 @@ export default function Navbar() {
         className="
 sticky top-0 z-50
 h-16
-mx-6 mt-4
+mx-2 mt-2
+sm:mx-4
+lg:mx-6
 px-6
 
 flex items-center justify-between
@@ -49,7 +51,9 @@ shadow-xl shadow-black/20
           </button>
 
           <div>
-            <h1 className="font-bold text-lg">WAEC Dashboard</h1>
+            <h1 className="font-bold text-lg hidden sm:block">
+              WAEC Dashboard
+            </h1>
 
             <p className="text-xs opacity-60 hidden md:block">
               National Examination Administration
@@ -74,7 +78,7 @@ shadow-xl shadow-black/20
         {/* RIGHT */}
         <div className="flex items-center gap-3 relative">
           {/* Dark Mode */}
-          <button className="p-2 rounded-lg hover:bg-white/5">
+          <button className="hidden md:block p-2 rounded-lg hover:bg-white/5">
             <Moon size={20} />
           </button>
 

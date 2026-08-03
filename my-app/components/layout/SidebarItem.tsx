@@ -1,9 +1,9 @@
 "use client";
 
+import { SidebarItem as SidebarItemType } from "@/lib/types/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SidebarAccordion from "./SidebarAccordion";
-import { SidebarItem as SidebarItemType } from "@/lib/types/sidebar";
 
 interface Props {
   item: SidebarItemType;
@@ -34,11 +34,11 @@ export default function SidebarItem({
         title={item.name}
         icon={Icon}
         open={examOpen}
-         active={activeMenu === "Examinations"}
-         onToggle={() => {
-        setExamOpen(prev => !prev);
-        setActiveMenu("Examinations");
-    }}
+        active={activeMenu === "Examinations"}
+        onToggle={() => {
+          setExamOpen((prev) => !prev);
+          setActiveMenu("Examinations");
+        }}
       >
         {item.children.map((child) => {
           const ChildIcon = child.icon;
@@ -48,10 +48,9 @@ export default function SidebarItem({
               key={child.name}
               href={child.href}
               onClick={() => {
-    setExamOpen(true);
-    setActiveMenu(child.name);
-}}
-
+                setExamOpen(true);
+                setActiveMenu(child.name);
+              }}
               className={`
                 flex items-center gap-3
                 px-3 py-2
@@ -78,10 +77,10 @@ export default function SidebarItem({
   return (
     <Link
       href={item.href}
-       onClick={() => {
-    setActiveMenu(item.name);
-    setExamOpen(false);
-  }}
+      onClick={() => {
+        setActiveMenu(item.name);
+        setExamOpen(false);
+      }}
       className={`
         flex items-center gap-3
         px-3 py-3
@@ -89,8 +88,8 @@ export default function SidebarItem({
         transition-all
         ${
           activeMenu === item.name
-    ? "bg-cyan-500 text-white shadow-lg"
-    : "hover:bg-[var(--muted)] text-gray-300"
+            ? "bg-cyan-500 text-white shadow-lg"
+            : "hover:bg-[var(--muted)] text-gray-300"
         }
       `}
     >

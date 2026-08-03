@@ -1,8 +1,7 @@
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function CandidatesPage() {
   return (
-
     <>
       <PageHeader
         title="Candidates"
@@ -12,8 +11,6 @@ export default function CandidatesPage() {
       {/* Candidate Cards */}
 
       {/* Candidate Table */}
-
     </>
-
   );
 }

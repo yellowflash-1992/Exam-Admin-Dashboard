@@ -1,18 +1,13 @@
 "use client";
 
-import SidebarAccordion from "@/components/SidebarAccordion";
-import SidebarSection from "@/components/SidebarSection";
+import SidebarSection from "@/components/layout/SidebarSection";
 import { sidebarMenu } from "@/lib/data/sidebar";
 import { LogOut, Settings } from "lucide-react";
-import SidebarItem from "@/components/SidebarItem";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Sidebar() {
-  
-
   const [examOpen, setExamOpen] = useState(false);
-const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [activeMenu, setActiveMenu] = useState("Dashboard");
 
   // const examRoutes = ["/waec", "/jamb", "/neco", "/nabteb"];
 
@@ -41,15 +36,15 @@ const [activeMenu, setActiveMenu] = useState("Dashboard");
 
       <nav className="flex-1 space-y-8">
         {sidebarMenu.map((section) => (
-  <SidebarSection
-  key={section.title}
-  section={section}
-  examOpen={examOpen}
-  setExamOpen={setExamOpen}
-  activeMenu={activeMenu}
-  setActiveMenu={setActiveMenu}
-/>
-))}
+          <SidebarSection
+            key={section.title}
+            section={section}
+            examOpen={examOpen}
+            setExamOpen={setExamOpen}
+            activeMenu={activeMenu}
+            setActiveMenu={setActiveMenu}
+          />
+        ))}
       </nav>
 
       {/* Footer */}

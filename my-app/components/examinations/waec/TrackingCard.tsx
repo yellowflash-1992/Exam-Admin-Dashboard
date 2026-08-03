@@ -2,7 +2,7 @@
 
 // import { dashboardData } from "../data/dashboard";
 import { ArrowRight, MapPinned, Users } from "lucide-react";
-import { dashboardData } from "../data/dashboard";
+import { dashboardData } from "../../data/dashboard";
 
 const icons = {
   centre: MapPinned,

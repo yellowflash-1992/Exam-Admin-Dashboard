@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, UserCheck, UserPlus, Users } from "lucide-react";
-import { dashboardData } from "../data/dashboard";
+import { dashboardData } from "../../data/dashboard";
 
 const icons = {
   today: UserCheck,
