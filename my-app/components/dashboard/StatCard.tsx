@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Users,
-  Building2,
-  FileCheck,
-  Award,
-  TrendingUp,
-} from "lucide-react";
+import { Award, Building2, FileCheck, TrendingUp, Users } from "lucide-react";
 
 const icons = {
   users: Users,

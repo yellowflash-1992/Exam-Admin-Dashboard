@@ -1,19 +1,22 @@
 "use client";
 
-import {
-    Activity,
-    MapPinned,
-    Users,
-    FileText,
-    ArrowRight
-} from "lucide-react";
+// import { dashboardData } from "../data/dashboard";
+import { ArrowRight, MapPinned, Users } from "lucide-react";
+import { dashboardData } from "../data/dashboard";
 
-export default function TrackingCard(){
+const icons = {
+  centre: MapPinned,
+  users: Users,
+};
 
-    return(
+type TrackingCardProps = {
+  tracking: typeof dashboardData.tracking;
+};
 
-        <div
-        className="
+export default function TrackingCard({ tracking }: TrackingCardProps) {
+  return (
+    <div
+      className="
         h-[300px]
         rounded-3xl
         border
@@ -22,22 +25,15 @@ export default function TrackingCard(){
         flex
         flex-col
         "
-        >
+    >
+      <div className="px-4 py-3 border-b border-[var(--border)]">
+        <div className="flex justify-between items-center">
+          <div className="text-xs uppercase tracking-widest text-slate-400 ">
+            Tracking
+          </div>
 
-           <div className="px-4 py-3 border-b border-[var(--border)]">
-
-    <div className="flex justify-between items-center">
-
-        
-
-            <div className="text-xs uppercase tracking-widest text-slate-400 ">
-
-                Tracking
-
-                 </div>
-
-                <div
-        className="
+          <div
+            className="
         flex
         items-center
         gap-2
@@ -46,45 +42,28 @@ export default function TrackingCard(){
         px-3
         py-1
         "
-        >
-
+          >
             <span
-            className="
+              className="
             w-2
             h-2
             rounded-full
             bg-emerald-400
             animate-pulse
-            "/>
+            "
+            />
 
-            <span className="text-xs">
-
-                Live
-
-            </span>
-
+            <span className="text-xs">Live</span>
+          </div>
         </div>
 
-</div>
-           
-
-            <div>
-
-            <h2 className="text-2xl font-bold mt-1 text-center">
-
-                Nationwide
-
-            </h2>
-
+        <div>
+          <h2 className="text-2xl font-bold mt-1 text-center">Nationwide</h2>
         </div>
+      </div>
 
-        
-    
-
-</div>
-
-           <div
-className="
+      <div
+        className="
 flex-1
 flex
 flex-col
@@ -92,90 +71,48 @@ justify-center
 items-center
 px-5
 py-3
-">
-
-    {/* <Activity
+"
+      >
+        {/* <Activity
     size={32}
     className="text-cyan-400 mb-3"
     /> */}
 
-    <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold">{tracking.progress}%</h1>
 
-        72%
+        <p className="mt-1 text-xs text-slate-400">Examination Progress</p>
+      </div>
 
-    </h1>
-
-    <p className="mt-1 text-xs text-slate-400">
-
-        Examination Progress
-
-    </p>
-
-</div>
-
-            <div
-className="
+      <div
+        className="
 border-t
 border-[var(--border)]
 px-5
 py-4
 space-y-3
-">
+"
+      >
+        {tracking.metrics.map((item) => {
+          const Icon = icons[item.icon];
 
-    <div className="flex justify-between items-center">
+          return (
+            <div key={item.id} className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                {<Icon size={16} className="text-cyan-400" />}
 
-        <div className="flex items-center gap-2">
+                <span className="text-sm">{item.label}</span>
+              </div>
 
-            <MapPinned
-            size={16}
-            className="text-cyan-400"
-            />
+              <span className="font-semibold">
+                {item.value.toLocaleString()}
+              </span>
+            </div>
+          );
+        })}
+      </div>
 
-            <span className="text-sm">
-
-                Centres Open
-
-            </span>
-
-        </div>
-
-        <span className="font-semibold">
-
-            2,847
-
-        </span>
-
-    </div>
-
-    <div className="flex justify-between items-center">
-
-        <div className="flex items-center gap-2">
-
-            <Users
-            size={16}
-            className="text-cyan-400"
-            />
-
-            <span className="text-sm">
-
-                Checked In
-
-            </span>
-
-        </div>
-
-        <span className="font-semibold">
-
-            890,213
-
-        </span>
-
-    </div>
-
-</div>
-
-<button
-  className="
+      <button
+        className="
   group
   self-start
   rounded-xl
@@ -185,20 +122,18 @@ space-y-3
   hover:bg-cyan-500
   hover:text-slate-950
   px-4
-  py-0.5 ml-2 
+  py-0.5 ml-2
   flex
   items-center
   overflow-hidden
   transition-all
   duration-300
   "
->
-    <span className="whitespace-nowrap font-medium">
-        View
-    </span>
+      >
+        <span className="whitespace-nowrap font-medium">View</span>
 
-    <span
-      className="
+        <span
+          className="
       max-w-0
       overflow-hidden
       whitespace-nowrap
@@ -208,15 +143,13 @@ space-y-3
       group-hover:max-w-40
       group-hover:opacity-100
       "
-    >
-        <span className="ml-2">
-            Live Tracking
+        >
+          <span className="ml-2">Live Tracking</span>
         </span>
-    </span>
 
-    <ArrowRight
-      size={16}
-      className="
+        <ArrowRight
+          size={16}
+          className="
       ml-0
       opacity-0
       transition-all
@@ -225,16 +158,11 @@ space-y-3
       group-hover:opacity-100
       group-hover:translate-x-1
       "
-    />
-</button>
-        </div>
-
-    );
-
+        />
+      </button>
+    </div>
+  );
 }
-
-
-
 
 // "use client";
 

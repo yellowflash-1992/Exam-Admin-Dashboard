@@ -11,13 +11,11 @@ export default function Pagination({
 }: Props) {
   return (
     <div className="flex items-center justify-between mt-6">
-
       <p className="text-sm opacity-60">
         Page {currentPage} of {totalPages}
       </p>
 
       <div className="flex gap-2">
-
         <button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage(currentPage - 1)}
@@ -33,9 +31,7 @@ export default function Pagination({
         >
           Next
         </button>
-
       </div>
-
     </div>
   );
 }

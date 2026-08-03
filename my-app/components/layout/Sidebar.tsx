@@ -1,167 +1,69 @@
 "use client";
 
-import Link from "next/link";
+import SidebarAccordion from "@/components/SidebarAccordion";
+import SidebarSection from "@/components/SidebarSection";
+import { sidebarMenu } from "@/lib/data/sidebar";
+import { LogOut, Settings } from "lucide-react";
+import SidebarItem from "@/components/SidebarItem";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  Home,
-  GraduationCap,
-  BookOpen,
-  School,
-  ClipboardList,
-  Users,
-  Building2,
-  UserCog,
-  FileCheck,
-  BarChart3,
-  PieChart,
-  TrendingUp,
-  Settings,
-  LogOut,
-} from "lucide-react";
+import { useState } from "react";
+
 export default function Sidebar() {
+  
 
-//   const menu = [
-//   {
-//     title: "MAIN",
-//     items: [
-//       {
-//         name: "WAEC",
-//         href: "/waec",
-//         icon: GraduationCap,
-//       },
-//       {
-//         name: "Candidates",
-//         href: "/candidates",
-//         icon: Users,
-//       },
-//       {
-//         name: "JAMB",
-//         href: "/jamb",
-//         icon: BookOpen,
-//       },
-//     ],
-//   },
-// ];
+  const [examOpen, setExamOpen] = useState(false);
+const [activeMenu, setActiveMenu] = useState("Dashboard");
 
-  const menu = [
-  {
-    title: "MAIN",
-    items: [
-      { name: "Dashboard", href: "/", icon: LayoutDashboard },
-      { name: "Overview", href: "/overview", icon: Home },
-    ],
-  },
-  {
-    title: "EXAMS",
-    items: [
-      { name: "WAEC", href: "/waec", icon: GraduationCap },
-      { name: "JAMB", href: "/jamb", icon: BookOpen },
-      { name: "NECO", href: "/neco", icon: School },
-      { name: "NABTEB", href: "/nabteb", icon: ClipboardList },
-    ],
-  },
-  {
-    title: "MANAGEMENT",
-    items: [
-      { name: "Candidates", href: "/candidates", icon: Users },
-      { name: "Centers", href: "/centers", icon: Building2 },
-      { name: "Officials", href: "/officials", icon: UserCog },
-      { name: "Results", href: "/results", icon: FileCheck },
-    ],
-  },
-  {
-    title: "ANALYTICS",
-    items: [
-      { name: "Reports", href: "/reports", icon: BarChart3 },
-      { name: "Statistics", href: "/statistics", icon: PieChart },
-      { name: "Performance", href: "/performance", icon: TrendingUp },
-    ],
-  },
-];
+  // const examRoutes = ["/waec", "/jamb", "/neco", "/nabteb"];
 
-const pathname = usePathname();
+  // const isExamPage = examRoutes.includes(pathname);
 
   return (
     <div
-className="
-hidden
-md:flex
-w-64
-p-4
-shrink-0
-flex-col
-bg-[var(--card)]
-border-r
-border-[var(--border)]
-overflow-y-auto
-">
+      className="
+        hidden
+        md:flex
+        w-64
+        p-4
+        shrink-0
+        flex-col
+        bg-[var(--card)]
+        border-r
+        border-[var(--border)]
+        overflow-y-auto
+      "
+    >
+      {/* Logo */}
       <div className="mb-8">
-    <h1 className="text-2xl font-bold">
-        Exam Admin
-    </h1>
-
-    <p className="text-xs opacity-60">
-        National Examination System
-    </p>
-</div>
+        <h1 className="text-2xl font-bold">Exam Admin</h1>
+        <p className="text-xs opacity-60">National Examination System</p>
+      </div>
 
       <nav className="flex-1 space-y-8">
-    {menu.map((section) => (
-        <div key={section.title}>
+        {sidebarMenu.map((section) => (
+  <SidebarSection
+  key={section.title}
+  section={section}
+  examOpen={examOpen}
+  setExamOpen={setExamOpen}
+  activeMenu={activeMenu}
+  setActiveMenu={setActiveMenu}
+/>
+))}
+      </nav>
 
-            <p className="text-xs uppercase tracking-wider opacity-50 mb-3">
-                {section.title}
-            </p>
+      {/* Footer */}
+      <div className="pt-6 border-t border-[var(--border)] space-y-2">
+        <button className="flex items-center gap-3 w-full px-3 py-3 rounded-xl hover:bg-[var(--muted)]">
+          <Settings size={18} />
+          <span>Settings</span>
+        </button>
 
-            <div className="space-y-1">
-
-                {section.items.map((item) => {
-                    const Icon = item.icon;
-
-                    return (
-                       <Link
-  key={item.name}
-  href={item.href}
-  className={`
-    flex items-center gap-3
-    px-3 py-3 rounded-xl
-    transition-all
-
-    ${
-      pathname === item.href
-        ? "bg-cyan-500 text-white shadow-lg"
-        : "hover:bg-[var(--muted)] text-gray-300"
-    }
-  `}
->
-  <Icon size={18} />
-  <span>{item.name}</span>
-</Link>
-                    );
-                })}
-
-            </div>
-
-        </div>
-    ))}
-</nav>
-
-<div className="pt-6 border-t border-[var(--border)] space-y-2">
-
-  <button className="flex items-center gap-3 w-full px-3 py-3 rounded-xl hover:bg-[var(--muted)]">
-    <Settings size={18} />
-    <span>Settings</span>
-  </button>
-
-  <button className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-red-400 hover:bg-red-500/20">
-    <LogOut size={18} />
-    <span>Logout</span>
-  </button>
-
-</div>
+        <button className="flex items-center gap-3 w-full px-3 py-3 rounded-xl text-red-400 hover:bg-red-500/20">
+          <LogOut size={18} />
+          <span>Logout</span>
+        </button>
+      </div>
     </div>
-
-    
   );
 }

@@ -1,17 +1,16 @@
 "use client";
 
-import {
-    TrendingUp,
-    CheckCircle2,
-    ArrowRight
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, TrendingUp } from "lucide-react";
+import { dashboardData } from "../data/dashboard";
 
-export default function PerformanceCard() {
+type PerformanceCardProps = {
+  performance: typeof dashboardData.performance;
+};
 
-    return (
-
-        <div
-            className="
+export default function PerformanceCard({ performance }: PerformanceCardProps) {
+  return (
+    <div
+      className="
             h-[300px]
             rounded-3xl
             border
@@ -20,19 +19,14 @@ export default function PerformanceCard() {
             flex
             flex-col
             "
-        >
-
-            <div className="px-4 py-3 border-b border-[var(--border)]">
-
-    <div className="flex justify-between items-center">
-
-        <span className="text-xs uppercase tracking-widest text-slate-400">
-
+    >
+      <div className="px-4 py-3 border-b border-[var(--border)]">
+        <div className="flex justify-between items-center">
+          <span className="text-xs uppercase tracking-widest text-slate-400">
             Performance
+          </span>
 
-        </span>
-
-        <div
+          <div
             className="
             flex
             items-center
@@ -42,117 +36,64 @@ export default function PerformanceCard() {
             px-3
             py-1
             "
-        >
+          >
+            <TrendingUp size={14} className="text-cyan-400" />
 
-            <TrendingUp
-                size={14}
-                className="text-cyan-400"
-            />
-
-            <span className="text-xs text-cyan-400">
-
-                +2.8%
-
-            </span>
-
+            <span className="text-xs text-cyan-400">+2.8%</span>
+          </div>
         </div>
 
-    </div>
+        <h2 className="text-2xl font-bold mt-2 text-center">System Health</h2>
+      </div>
 
-    <h2 className="text-2xl font-bold mt-2 text-center">
-
-        System Health
-
-    </h2>
-
-</div>
-
-            <div
-className="
+      <div
+        className="
 flex-1
 flex
 flex-col
 justify-center
 items-center
 "
->
+      >
+        <p className="text-4xl font-bold">{performance.health}</p>
 
-    <p className="text-4xl font-bold">
+        <p className="text-2xl font-semibold text-cyan-400">
+          {performance.score}%
+        </p>
 
-        A+
+        <p className="text-xs text-slate-400 mt-1">Overall Performance</p>
+      </div>
 
-    </p>
-
-    <p className="text-2xl font-semibold text-cyan-400">
-
-        98.6%
-
-    </p>
-
-    <p className="text-xs text-slate-400 mt-1">
-
-        Overall Performance
-
-    </p>
-
-</div>
-
-            <div
-className="
+      <div
+        className="
 border-t
 border-[var(--border)]
 px-5
 py-4
 space-y-3
 "
->
-
-    <div className="flex justify-between items-center">
-
-        <span className="flex items-center gap-2 text-sm">
-
-            <CheckCircle2
-                size={16}
-                className="text-emerald-400"
-            />
-
+      >
+        <div className="flex justify-between items-center">
+          <span className="flex items-center gap-2 text-sm">
+            <CheckCircle2 size={16} className="text-emerald-400" />
             Server Uptime
+          </span>
 
-        </span>
+          <span className="font-medium">{performance.uptime}%</span>
+        </div>
 
-        <span className="font-medium">
-
-            99.9%
-
-        </span>
-
-    </div>
-
-    <div className="flex justify-between items-center">
-
-        <span className="flex items-center gap-2 text-sm">
-
-            <CheckCircle2
-                size={16}
-                className="text-emerald-400"
-            />
-
+        <div className="flex justify-between items-center">
+          <span className="flex items-center gap-2 text-sm">
+            <CheckCircle2 size={16} className="text-emerald-400" />
             Attendance
+          </span>
 
-        </span>
+          <span className="font-medium">{performance.attendance}</span>
+        </div>
+      </div>
 
-        <span className="font-medium">
-
-            Excellent
-
-        </span>
-
-    </div>
-
-</div>
-
-           <button
-  className="
+      <button
+        className="
   group
   self-start
   rounded-xl
@@ -169,13 +110,11 @@ space-y-3
   transition-all
   duration-300
   "
->
-    <span className="whitespace-nowrap font-medium">
-        View
-    </span>
+      >
+        <span className="whitespace-nowrap font-medium">View</span>
 
-    <span
-      className="
+        <span
+          className="
       max-w-0
       overflow-hidden
       whitespace-nowrap
@@ -185,15 +124,13 @@ space-y-3
       group-hover:max-w-40
       group-hover:opacity-100
       "
-    >
-        <span className="ml-2">
-            Analytics
+        >
+          <span className="ml-2">Analytics</span>
         </span>
-    </span>
 
-    <ArrowRight
-      size={16}
-      className="
+        <ArrowRight
+          size={16}
+          className="
       ml-0
       opacity-0
       transition-all
@@ -202,23 +139,11 @@ space-y-3
       group-hover:opacity-100
       group-hover:translate-x-1
       "
-    />
-</button>
-
-
-        </div>
-
-    );
-
+        />
+      </button>
+    </div>
+  );
 }
-
-
-
-
-
-
-
-
 
 // "use client";
 
