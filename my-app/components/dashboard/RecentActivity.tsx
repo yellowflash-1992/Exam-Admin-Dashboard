@@ -4,6 +4,7 @@ import {
   Users,
   UserCog,
 } from "lucide-react";
+import Card from "../ui/Card";
 
 const activities = [
   {
@@ -11,19 +12,16 @@ const activities = [
     subtitle: "2 minutes ago",
     icon: FileCheck,
   },
-
   {
     title: "New Centre Registered",
     subtitle: "18 minutes ago",
     icon: Building2,
   },
-
   {
     title: "Candidate Added",
     subtitle: "45 minutes ago",
     icon: Users,
   },
-
   {
     title: "Official Account Created",
     subtitle: "1 hour ago",
@@ -33,17 +31,8 @@ const activities = [
 
 export default function RecentActivity() {
   return (
-    <div
-      className="
-      bg-[var(--card)]
-      border
-      border-[var(--border)]
-      rounded-2xl
-      p-6
-      h-full
-    "
-    >
-      <h2 className="text-lg font-semibold mb-6">
+    <Card hover className="py-3">
+      <h2 className="text-lg font-semibold mb-5">
         Recent Activity
       </h2>
 
@@ -55,26 +44,22 @@ export default function RecentActivity() {
             <div
               key={activity.title}
               className="
-              flex
-              items-center
-              gap-4
-            "
+                flex
+                items-center
+                gap-4
+              "
             >
               <div
                 className="
-                w-11
-                h-11
-
-                rounded-xl
-
-                bg-cyan-500/10
-
-                flex
-
-                items-center
-
-                justify-center
-              "
+                  w-11
+                  h-11
+                  shrink-0
+                  rounded-xl
+                  bg-cyan-500/10
+                  flex
+                  items-center
+                  justify-center
+                "
               >
                 <Icon
                   size={18}
@@ -82,8 +67,8 @@ export default function RecentActivity() {
                 />
               </div>
 
-              <div>
-                <p className="font-medium">
+              <div className="min-w-0">
+                <p className="font-medium truncate">
                   {activity.title}
                 </p>
 
@@ -95,6 +80,6 @@ export default function RecentActivity() {
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 }

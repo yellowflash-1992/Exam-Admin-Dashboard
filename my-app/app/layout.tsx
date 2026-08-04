@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WAEC & JAMB Admin",
+  title: "BlueEye Exam Admin",
   description: "Examination Dashboard",
 };
 

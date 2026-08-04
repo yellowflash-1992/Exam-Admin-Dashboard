@@ -24,7 +24,7 @@ export default function Navbar() {
     <>
       <div
         className="
-sticky top-0 z-50
+ top-0 z-50
 h-16
 mx-2 mt-2
 sm:mx-4

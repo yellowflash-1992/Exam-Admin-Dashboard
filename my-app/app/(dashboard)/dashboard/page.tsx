@@ -1,25 +1,19 @@
-import StatCard from "@/components/dashboard/StatCard";
+import AttentionRequired from "@/components/dashboard/AttentionRequired";
+import ExaminationStatus from "@/components/dashboard/ExaminationStatus";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RecentActivity from "@/components/dashboard/RecentActivity";
 import RegistrationChart from "@/components/dashboard/RegistrationChart";
-import {
-  Users,
-  Building2,
-  UserCog,
-  FileCheck,
-} from "lucide-react";
+import StatCard from "@/components/dashboard/StatCard";
+import Card from "@/components/ui/Card";
+import { Building2, FileCheck, UserCog, Users } from "lucide-react";
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 min-w-0">
       <div>
-        <h1 className="text-3xl font-bold">
-          Dashboard
-        </h1>
+        <h1 className="text-3xl font-bold">Dashboard</h1>
 
-        <p className="opacity-60 mt-1">
-          Welcome back, Administrator.
-        </p>
+        <p className="opacity-60 mt-1">Welcome back, Administrator.</p>
       </div>
 
       <div
@@ -35,6 +29,8 @@ export default function DashboardPage() {
           title="Candidates"
           value="12,430"
           icon={Users}
+          trend="↑ 8.4%"
+          description="vs last month"
         />
 
         <StatCard
@@ -42,6 +38,8 @@ export default function DashboardPage() {
           value="148"
           icon={Building2}
           color="bg-blue-500"
+          trend="+6"
+          description="this month"
         />
 
         <StatCard
@@ -49,6 +47,8 @@ export default function DashboardPage() {
           value="512"
           icon={UserCog}
           color="bg-green-500"
+          trend="24"
+          description="pending approval"
         />
 
         <StatCard
@@ -56,37 +56,40 @@ export default function DashboardPage() {
           value="9,820"
           icon={FileCheck}
           color="bg-purple-500"
+          trend="79%"
+          description="processed"
         />
       </div>
 
-
       <div
-  className="
+        className="
   grid
-  gap-6
-  lg:grid-cols-2
+          grid-cols-1
+          gap-6
+          lg:grid-cols-2
+          min-w-0
 "
->
-  <QuickActions />
+      >
+        <QuickActions />
 
-  <div
-    className="
-    bg-[var(--card)]
-    border
-    border-[var(--border)]
-    rounded-2xl
-    p-6
-  "
-  >
-    <RecentActivity />
-  </div>
+        <Card>
+          <RecentActivity />
+        </Card>
 
-  <RegistrationChart />
-</div>
+        <Card>
+          <ExaminationStatus />
+        </Card>
+
+        <Card>
+          <AttentionRequired />
+        </Card>
+
+        <Card className="lg:col-span-2">
+          <RegistrationChart />
+        </Card>
 
 
-
-
+      </div>
     </div>
   );
 }
