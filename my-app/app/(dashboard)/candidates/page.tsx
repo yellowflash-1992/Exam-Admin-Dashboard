@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import AddCandidateModal from "@/components/candidates/AddCandidateModal";
+// import AddCandidateModal from "@/components/candidates/AddCandidateModal";
 import CandidateFilters from "@/components/candidates/CandidateFilters";
 import CandidateModal from "@/components/candidates/CandidateModal";
 import CandidatesHeader from "@/components/candidates/CandidatesHeader";
@@ -11,21 +11,33 @@ import CandidateTable from "@/components/candidates/CandidateTable";
 import DeleteCandidateModal from "@/components/candidates/DeleteCandidateModal";
 import EditCandidateModal from "@/components/candidates/EditCandidateModal";
 import Pagination from "@/components/candidates/Pagination";
-import { candidates } from "@/lib/data/candidates";
+import { useCandidateStore } from "@/lib/stores/candidateStore";
 import type { Candidate } from "@/lib/types/candidate";
+import { useUIStore } from "@/lib/stores/uiStore";
+//import { useActivityStore } from "@/lib/stores/activityStore";
 
 // const candidates = [
 //   ...
 // ];
 
 export default function CandidatesPage() {
-  const [candidateList, setCandidateList] = useState(candidates);
+  // const addCandidateOpen = useUIStore((state) => state.addCandidateOpen);
+
+  const openAddCandidate = useUIStore((state) => state.openAddCandidate);
+
+  // const closeAddCandidate = useUIStore((state) => state.closeAddCandidate);
+
+  const candidateList = useCandidateStore((state) => state.candidates);
+
+  const updateCandidate = useCandidateStore((state) => state.updateCandidate);
+
+  const deleteCandidate = useCandidateStore((state) => state.deleteCandidate);
 
   const [search, setSearch] = useState("");
   const [exam, setExam] = useState("");
   const [selectedState, setSelectedState] = useState("");
 
-  const [showAddModal, setShowAddModal] = useState(false);
+  // const [showAddModal, setShowAddModal] = useState(false);
 
   const filtered = candidateList.filter((candidate) => {
     const matchesSearch = candidate.name
@@ -69,7 +81,7 @@ export default function CandidatesPage() {
 
   return (
     <div className="space-y-6 px-4 py-4">
-      <CandidatesHeader onAdd={() => setShowAddModal(true)} />
+      <CandidatesHeader onAdd={openAddCandidate} />
 
       <CandidateStats candidates={filtered} />
 
@@ -106,36 +118,34 @@ export default function CandidatesPage() {
         candidate={editingCandidate}
         onClose={() => setEditingCandidate(null)}
         onSave={(updatedCandidate) => {
-          setCandidateList((prev) =>
-            prev.map((candidate) =>
-              candidate.id === updatedCandidate.id
-                ? updatedCandidate
-                : candidate,
-            ),
-          );
-
+          updateCandidate(updatedCandidate);
           setEditingCandidate(null);
         }}
       />
 
-      <AddCandidateModal
-        isOpen={showAddModal}
-        onClose={() => setShowAddModal(false)}
+      {/* <AddCandidateModal
+        isOpen={addCandidateOpen}
+        onClose={closeAddCandidate}
         onAdd={(candidate) => {
-          setCandidateList([...candidateList, candidate]);
-
-          setShowAddModal(false);
+          addCandidate(candidate);
+          closeAddCandidate();
         }}
-      />
+      /> */}
+
+      {/* <AddCandidateModal
+        isOpen={addCandidateOpen}
+        onClose={closeAddCandidate}
+        onAdd={(candidate) => {
+          addCandidate(candidate);
+          closeAddCandidate();
+        }}
+      /> */}
 
       <DeleteCandidateModal
         candidate={deletingCandidate}
         onClose={() => setDeletingCandidate(null)}
         onDelete={(id) => {
-          setCandidateList((prev) =>
-            prev.filter((candidate) => candidate.id !== id),
-          );
-
+          deleteCandidate(id);
           setDeletingCandidate(null);
         }}
       />

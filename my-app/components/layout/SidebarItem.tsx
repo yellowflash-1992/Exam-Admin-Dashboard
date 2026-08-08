@@ -24,9 +24,12 @@ export default function SidebarItem({
 
   const Icon = item.icon;
 
-  const examRoutes = ["/waec", "/jamb", "/neco", "/nabteb"];
-
-  const isExamPage = examRoutes.includes(pathname);
+  /*
+   * Examination parent is considered active when:
+   * 1. We are actually inside an examination route, OR
+   * 2. The user has just opened the examination dropdown.
+   */
+  const isExamPage = pathname.startsWith("/examinations");
 
   if (item.children) {
     return (
@@ -34,14 +37,30 @@ export default function SidebarItem({
         title={item.name}
         icon={Icon}
         open={examOpen}
-        active={activeMenu === "Examinations"}
+        active={isExamPage || activeMenu === "Examinations"}
         onToggle={() => {
-          setExamOpen((prev) => !prev);
-          setActiveMenu("Examinations");
+          setExamOpen((prev) => {
+            const nextOpen = !prev;
+
+            if (nextOpen) {
+              setActiveMenu("Examinations");
+            } else {
+              /*
+               * When closing the dropdown, remove the temporary
+               * Examination highlight. The actual page will then
+               * determine the active item from the URL.
+               */
+              setActiveMenu("");
+            }
+
+            return nextOpen;
+          });
         }}
       >
         {item.children.map((child) => {
           const ChildIcon = child.icon;
+
+          const isChildActive = pathname === child.href;
 
           return (
             <Link
@@ -57,13 +76,14 @@ export default function SidebarItem({
                 rounded-lg
                 transition-all
                 ${
-                  pathname === child.href
+                  isChildActive
                     ? "bg-[var(--muted)] text-cyan-500 font-semibold"
                     : "hover:bg-[var(--muted)]"
                 }
               `}
             >
               <ChildIcon size={16} />
+
               <span>{child.name}</span>
             </Link>
           );
@@ -73,6 +93,16 @@ export default function SidebarItem({
   }
 
   if (!item.href) return null;
+
+  /*
+   * Normal pages use the URL as the source of truth.
+   *
+   * activeMenu is only used as a temporary override while the
+   * Examination dropdown is being interacted with.
+   */
+  const isActive =
+    activeMenu === item.name ||
+    (activeMenu === "" && pathname === item.href);
 
   return (
     <Link
@@ -87,13 +117,14 @@ export default function SidebarItem({
         rounded-xl
         transition-all
         ${
-          activeMenu === item.name
+          isActive
             ? "bg-cyan-500 text-white shadow-lg"
             : "hover:bg-[var(--muted)] text-gray-300"
         }
       `}
     >
       <Icon size={18} />
+
       <span>{item.name}</span>
     </Link>
   );

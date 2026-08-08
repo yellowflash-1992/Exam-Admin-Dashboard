@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function Sidebar() {
   const [examOpen, setExamOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState("Dashboard");
+  const [activeMenu, setActiveMenu] = useState("");
 
   // const examRoutes = ["/waec", "/jamb", "/neco", "/nabteb"];
 

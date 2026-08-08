@@ -1,65 +1,103 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Card from "../ui/Card";
+import { useActivityStore } from "@/lib/stores/activityStore";
 import {
   FileCheck,
   Building2,
   Users,
   UserCog,
-  LucideIcon,
+  UserX,
 } from "lucide-react";
-import Card from "../ui/Card";
 
-type Activity = {
-  title: string;
-  subtitle: string;
-  icon: LucideIcon;
-  color: string;
-  background: string;
-};
-
-const activities: Activity[] = [
-  {
-    title: "WAEC Results Uploaded",
-    subtitle: "2 minutes ago",
-    icon: FileCheck,
-    color: "text-purple-400",
-    background: "bg-purple-500/10",
-  },
-  {
-    title: "New Centre Registered",
-    subtitle: "18 minutes ago",
-    icon: Building2,
-    color: "text-blue-400",
-    background: "bg-blue-500/10",
-  },
-  {
-    title: "Candidate Added",
-    subtitle: "45 minutes ago",
+const activityPresentation = {
+  users: {
     icon: Users,
     color: "text-cyan-400",
     background: "bg-cyan-500/10",
   },
-  {
-    title: "Official Account Created",
-    subtitle: "1 hour ago",
+
+  userCog: {
     icon: UserCog,
-    color: "text-green-400",
-    background: "bg-green-500/10",
+    color: "text-blue-400",
+    background: "bg-blue-500/10",
   },
-];
+
+  userX: {
+    icon: UserX,
+    color: "text-red-400",
+    background: "bg-red-500/10",
+  },
+
+  building: {
+    icon: Building2,
+    color: "text-purple-400",
+    background: "bg-purple-500/10",
+  },
+
+  fileCheck: {
+    icon: FileCheck,
+    color: "text-cyan-400",
+    background: "bg-cyan-500/10",
+  },
+};
+
+function formatElapsed(timestamp: number) {
+  const diff = Math.max(0, Date.now() - timestamp);
+
+  if (diff < 60 * 1000) {
+    return "Just now";
+  }
+
+  const mins = Math.floor(diff / (60 * 1000));
+
+  if (mins < 60) {
+    return `${mins}m ago`;
+  }
+
+  const hours = Math.floor(mins / 60);
+
+  if (hours < 24) {
+    return `${hours}h ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+
+  return `${days}d ago`;
+}
 
 export default function RecentActivity() {
+  const activities = useActivityStore(
+    (state) => state.activities,
+  );
+
+  const [, setTick] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTick((tick) => tick + 1);
+    }, 30 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Card hover className="py-3">
       <h2 className="text-lg font-semibold mb-4">
         Recent Activity
       </h2>
 
-      <div className="space-y-2">
+      <div className="dashboard-scroll max-h-[270px] overflow-y-auto pr-2 space-y-2">
         {activities.map((activity) => {
-          const Icon = activity.icon;
+          const presentation =
+            activityPresentation[activity.icon as keyof typeof activityPresentation];
+
+          const Icon = presentation?.icon ?? Users;
 
           return (
             <div
-              key={activity.title}
+              key={activity.id}
               className="
                 flex
                 items-center
@@ -80,8 +118,8 @@ export default function RecentActivity() {
                   flex
                   items-center
                   justify-center
-                  ${activity.background}
-                  ${activity.color}
+                  ${presentation?.background ?? "bg-cyan-500/10"}
+                  ${presentation?.color ?? "text-cyan-400"}
                 `}
               >
                 <Icon size={18} />
@@ -93,7 +131,7 @@ export default function RecentActivity() {
                 </p>
 
                 <p className="text-sm opacity-50">
-                  {activity.subtitle}
+                  {formatElapsed(activity.timestamp)}
                 </p>
               </div>
             </div>

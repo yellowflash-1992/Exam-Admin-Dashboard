@@ -30,13 +30,13 @@ export default function CandidateFilters({
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search candidate..."
-        className="flex-1 rounded-xl border border-(--border) bg-[var(--card)] px-4 py-3"
+        className="flex-1 rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3"
       />
 
       <select
         value={exam}
         onChange={(e) => setExam(e.target.value)}
-        className="rounded-xl border border-(--border) bg-[var(--card)] px-4"
+        className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4"
       >
         <option value="">All Exams</option>
         {/* <option>WAEC</option>
@@ -54,7 +54,7 @@ export default function CandidateFilters({
       <select
         value={state}
         onChange={(e) => setState(e.target.value)}
-        className="rounded-xl border border-(--border) bg-[var(--card)] px-4"
+        className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4"
       >
         <option value="">All States</option>
         {/* <option>Lagos</option>

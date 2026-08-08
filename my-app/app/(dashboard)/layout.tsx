@@ -1,5 +1,7 @@
 import Sidebar from "@/components/layout/Sidebar";
 import Navbar from "@/components/layout/Navbar";
+import DashboardModals from "@/components/layout/DashboardModals";
+
 
 export default function DashboardLayout({
   children,
@@ -19,6 +21,8 @@ export default function DashboardLayout({
     </main>
 
   </div>
+
+  <DashboardModals />
 </div>
   );
 }
