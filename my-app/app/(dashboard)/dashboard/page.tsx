@@ -1,3 +1,5 @@
+"use client";
+
 import AttentionRequired from "@/components/dashboard/AttentionRequired";
 import ExaminationStatus from "@/components/dashboard/ExaminationStatus";
 import QuickActions from "@/components/dashboard/QuickActions";
@@ -5,9 +7,42 @@ import RecentActivity from "@/components/dashboard/RecentActivity";
 import RegistrationChart from "@/components/dashboard/RegistrationChart";
 import StatCard from "@/components/dashboard/StatCard";
 import Card from "@/components/ui/Card";
+import { results } from "@/lib/data/results";
+import { useCandidateStore } from "@/lib/stores/candidateStore";
+import { useCentreStore } from "@/lib/stores/centreStore";
+import { useOfficialStore } from "@/lib/stores/officialStore";
 import { Building2, FileCheck, UserCog, Users } from "lucide-react";
 
 export default function DashboardPage() {
+  const candidates = useCandidateStore((state) => state.candidates);
+
+  const centres = useCentreStore((state) => state.centres);
+
+  const officials = useOfficialStore((state) => state.officials);
+
+  const totalCandidates = candidates.length;
+
+  const totalCentres = centres.length;
+
+  const totalOfficials = officials.length;
+
+  const activeCentres = centres.filter(
+    (centre) => centre.status === "Active",
+  ).length;
+
+  const activeOfficials = officials.filter(
+    (official) => official.status === "Active",
+  ).length;
+
+  const totalResults = results.length;
+
+  const verifiedResults = results.filter(
+    (result) => result.status === "Verified",
+  ).length;
+
+  const processedPercentage =
+    totalResults > 0 ? Math.round((verifiedResults / totalResults) * 100) : 0;
+
   return (
     <div className="space-y-8 min-w-0">
       <div>
@@ -27,37 +62,37 @@ export default function DashboardPage() {
       >
         <StatCard
           title="Candidates"
-          value="12,430"
+          value={totalCandidates}
           icon={Users}
-          trend="↑ 8.4%"
+          // trend="↑ 8.4%"
           description="vs last month"
         />
 
         <StatCard
           title="Centres"
-          value="148"
+          value={totalCentres}
           icon={Building2}
           color="bg-blue-500"
-          trend="+6"
-          description="this month"
+          trend={`+${activeCentres}`}
+          description="active"
         />
 
         <StatCard
           title="Officials"
-          value="512"
+          value={totalOfficials}
           icon={UserCog}
           color="bg-green-500"
-          trend="24"
-          description="pending approval"
+          trend={`${activeOfficials}`}
+          description="active"
         />
 
         <StatCard
           title="Results"
-          value="9,820"
+          value={totalResults}
           icon={FileCheck}
           color="bg-purple-500"
-          trend="79%"
-          description="processed"
+          trend={`${processedPercentage}%`}
+          description="verified"
         />
       </div>
 
@@ -87,8 +122,6 @@ export default function DashboardPage() {
         <Card className="lg:col-span-2">
           <RegistrationChart />
         </Card>
-
-
       </div>
     </div>
   );

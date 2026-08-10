@@ -1,3 +1,4 @@
+// note: This component (is no more in use) in the candidates page to display pagination controls.
 type Props = {
   currentPage: number;
   totalPages: number;

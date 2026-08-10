@@ -2,8 +2,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { candidates as initialCandidates } from "@/lib/data/candidates";
-import type { Candidate } from "@/lib/types/candidate";
 import { useActivityStore } from "@/lib/stores/activityStore";
+import type { Candidate } from "@/lib/types/candidate";
 
 type CandidateStore = {
   candidates: Candidate[];
@@ -24,7 +24,7 @@ export const useCandidateStore = create<CandidateStore>()(
         }));
 
         useActivityStore.getState().addActivity({
-          title: "Candidate Added",
+          title: `Candidate Added: ${candidate.name}`,
           icon: "users",
         });
       },
@@ -38,34 +38,30 @@ export const useCandidateStore = create<CandidateStore>()(
 
         set((state) => ({
           candidates: state.candidates.map((candidate) =>
-            candidate.id === updatedCandidate.id
-              ? updatedCandidate
-              : candidate,
+            candidate.id === updatedCandidate.id ? updatedCandidate : candidate,
           ),
         }));
 
         useActivityStore.getState().addActivity({
-          title: "Candidate Updated",
-          icon: "userCog",
+          title: `Candidate Updated: ${updatedCandidate.name}`,
+          icon: "users",
         });
       },
 
       deleteCandidate: (id) => {
-        const exists = get().candidates.some(
-          (candidate) => candidate.id === id,
-        );
+        set((state) => {
+          const candidate = state.candidates.find((item) => item.id === id);
 
-        if (!exists) return;
+          if (candidate) {
+            useActivityStore.getState().addActivity({
+              title: `Candidate Deleted: ${candidate.name}`,
+              icon: "userX",
+            });
+          }
 
-        set((state) => ({
-          candidates: state.candidates.filter(
-            (candidate) => candidate.id !== id,
-          ),
-        }));
-
-        useActivityStore.getState().addActivity({
-          title: "Candidate Deleted",
-          icon: "userX",
+          return {
+            candidates: state.candidates.filter((item) => item.id !== id),
+          };
         });
       },
     }),

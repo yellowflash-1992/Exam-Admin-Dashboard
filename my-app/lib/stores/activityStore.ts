@@ -11,9 +11,8 @@ export type ActivityIcon =
 export type Activity = {
   id: number;
   title: string;
-
   timestamp: number;
-  icon: ActivityIcon | string;
+  icon: ActivityIcon;
 };
 
 type ActivityStore = {

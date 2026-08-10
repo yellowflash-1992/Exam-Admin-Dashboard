@@ -10,10 +10,10 @@ import CandidateStats from "@/components/candidates/CandidateStats";
 import CandidateTable from "@/components/candidates/CandidateTable";
 import DeleteCandidateModal from "@/components/candidates/DeleteCandidateModal";
 import EditCandidateModal from "@/components/candidates/EditCandidateModal";
-import Pagination from "@/components/candidates/Pagination";
+import Pagination from "@/components/ui/Pagination";
 import { useCandidateStore } from "@/lib/stores/candidateStore";
-import type { Candidate } from "@/lib/types/candidate";
 import { useUIStore } from "@/lib/stores/uiStore";
+import type { Candidate } from "@/lib/types/candidate";
 //import { useActivityStore } from "@/lib/stores/activityStore";
 
 // const candidates = [
@@ -106,7 +106,7 @@ export default function CandidatesPage() {
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        setCurrentPage={setCurrentPage}
+        onPageChange={setCurrentPage}
       />
 
       <CandidateModal

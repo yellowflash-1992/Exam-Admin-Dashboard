@@ -24,7 +24,7 @@ export const useCentreStore = create<CentreStore>()(
         }));
 
         useActivityStore.getState().addActivity({
-          title: "Centre Added",
+          title: `Centre Added: ${centre.name}`,
           icon: "building",
         });
       },
@@ -37,19 +37,25 @@ export const useCentreStore = create<CentreStore>()(
         }));
 
         useActivityStore.getState().addActivity({
-          title: "Centre Updated",
+          title: `Centre Updated: ${updatedCentre.name}`,
           icon: "building",
         });
       },
 
       deleteCentre: (id) => {
-        set((state) => ({
-          centres: state.centres.filter((centre) => centre.id !== id),
-        }));
+        set((state) => {
+          const centre = state.centres.find((item) => item.id === id);
 
-        useActivityStore.getState().addActivity({
-          title: "Centre Deleted",
-          icon: "building",
+          if (centre) {
+            useActivityStore.getState().addActivity({
+              title: `Centre Deleted: ${centre.name}`,
+              icon: "building",
+            });
+          }
+
+          return {
+            centres: state.centres.filter((item) => item.id !== id),
+          };
         });
       },
     }),

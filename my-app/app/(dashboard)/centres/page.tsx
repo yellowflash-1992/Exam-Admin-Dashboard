@@ -9,7 +9,7 @@ import CentreStats from "@/components/centres/CentreStats";
 import CentreTable from "@/components/centres/CentreTable";
 import DeleteCentreModal from "@/components/centres/DeleteCentreModal";
 import EditCentreModal from "@/components/centres/EditCentreModal";
-import Pagination from "@/components/centres/Pagination";
+import Pagination from "@/components/ui/Pagination";
 
 import { useCentreStore } from "@/lib/stores/centreStore";
 import { useUIStore } from "@/lib/stores/uiStore";
@@ -70,8 +70,14 @@ export default function CentresPage() {
       <CentreFilters
         search={search}
         status={status}
-        onSearchChange={setSearch}
-        onStatusChange={setStatus}
+        onSearchChange={(value) => {
+          setSearch(value);
+          setCurrentPage(1);
+        }}
+        onStatusChange={(value) => {
+          setStatus(value);
+          setCurrentPage(1);
+        }}
       />
 
       <CentreTable
