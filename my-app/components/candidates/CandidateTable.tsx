@@ -3,16 +3,17 @@
 // import CandidateModal from "./CandidateModal";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import StatusBadge from "./StatusBadge";
+import type { Candidate } from "@/lib/types/candidate";
 
-type Candidate = {
-  id: number;
-  name: string;
-  exam: string;
-  state: string;
-  center: string;
-  status: string;
-  score: number;
-};
+// type Candidate = {
+//   id: number;
+//   name: string;
+//   exam: string;
+//   state: string;
+//   center: string;
+//   status: string;
+//   score: number;
+// };
 
 type CandidateTableProps = {
   candidates: Candidate[];
