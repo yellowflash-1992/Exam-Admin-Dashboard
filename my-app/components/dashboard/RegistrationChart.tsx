@@ -11,23 +11,59 @@ import {
   Brush,
 } from "recharts";
 import Card from "../ui/Card";
+import { useCandidateStore } from "@/lib/stores/candidateStore";
 
-const data = [
-  { month: "Jan", candidates: 1200 },
-  { month: "Feb", candidates: 1800 },
-  { month: "Mar", candidates: 2300 },
-  { month: "Apr", candidates: 2600 },
-  { month: "May", candidates: 3100 },
-  { month: "Jun", candidates: 4200 },
-  { month: "Jul", candidates: 3900 },
-  { month: "Aug", candidates: 4500 },
-  { month: "Sep", candidates: 4800 },
-  { month: "Oct", candidates: 4300 },
-  { month: "Nov", candidates: 5100 },
-  { month: "Dec", candidates: 5600 },
-];
+// const data = [
+//   { month: "Jan", candidates: 1200 },
+//   { month: "Feb", candidates: 1800 },
+//   { month: "Mar", candidates: 2300 },
+//   { month: "Apr", candidates: 2600 },
+//   { month: "May", candidates: 3100 },
+//   { month: "Jun", candidates: 4200 },
+//   { month: "Jul", candidates: 3900 },
+//   { month: "Aug", candidates: 4500 },
+//   { month: "Sep", candidates: 4800 },
+//   { month: "Oct", candidates: 4300 },
+//   { month: "Nov", candidates: 5100 },
+//   { month: "Dec", candidates: 5600 },
+// ];
 
 export default function RegistrationChart() {
+
+  const candidates = useCandidateStore(
+  (state) => state.candidates,
+);
+
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const data = months.map((month, index) => {
+  const candidatesInMonth = candidates.filter(
+    (candidate) => {
+      const date = new Date(candidate.registeredAt);
+
+      return date.getMonth() === index;
+    },
+  );
+
+  return {
+    month,
+    candidates: candidatesInMonth.length,
+  };
+});
+
   return (
     <Card hover>
       <div className="mb-6">

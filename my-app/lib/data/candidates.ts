@@ -7,6 +7,7 @@ export const candidates = [
     center: "UNN CBT Centre",
     status: "Passed",
     score: 280,
+    registeredAt: "2026-01-15",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const candidates = [
     center: "Sokoto Girls College",
     status: "Passed",
     score: 75,
+    registeredAt: "2026-01-20",
   },
   {
     id: 3,
@@ -25,6 +27,7 @@ export const candidates = [
     center: "Ibadan Grammar School",
     status: "Failed",
     score: 35,
+    registeredAt: "2026-01-29",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const candidates = [
     center: "Asaba Technical College",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-02-04",
   },
   {
     id: 5,
@@ -43,6 +47,7 @@ export const candidates = [
     center: "Port Harcourt High School",
     status: "Passed",
     score: 88,
+    registeredAt: "2026-02-14",
   },
   {
     id: 6,
@@ -52,6 +57,7 @@ export const candidates = [
     center: "BUK CBT Centre",
     status: "Passed",
     score: 215,
+    registeredAt: "2026-02-24",
   },
   {
     id: 7,
@@ -61,6 +67,7 @@ export const candidates = [
     center: "Igbobi College",
     status: "Passed",
     score: 68,
+    registeredAt: "2026-03-03",
   },
   {
     id: 8,
@@ -70,6 +77,7 @@ export const candidates = [
     center: "Uyo City College",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-03-12",
   },
   {
     id: 9,
@@ -79,6 +87,7 @@ export const candidates = [
     center: "KASU CBT Centre",
     status: "Failed",
     score: 140,
+    registeredAt: "2026-03-27",
   },
   {
     id: 10,
@@ -88,6 +97,7 @@ export const candidates = [
     center: "Katsina Vocational School",
     status: "Passed",
     score: 72,
+    registeredAt: "2026-04-05",
   },
   {
     id: 11,
@@ -97,6 +107,7 @@ export const candidates = [
     center: "Aba Boys Trade Centre",
     status: "Passed",
     score: 80,
+    registeredAt: "2026-04-12",
   },
   {
     id: 12,
@@ -106,6 +117,7 @@ export const candidates = [
     center: "Abeokuta Grammar School",
     status: "Failed",
     score: 42,
+    registeredAt: "2026-04-19",
   },
   {
     id: 13,
@@ -115,6 +127,7 @@ export const candidates = [
     center: "UNIJOS CBT Centre",
     status: "Passed",
     score: 255,
+    registeredAt: "2026-04-26",
   },
   {
     id: 14,
@@ -124,6 +137,7 @@ export const candidates = [
     center: "Owerri Girls Secondary",
     status: "Passed",
     score: 92,
+    registeredAt: "2026-05-02",
   },
   {
     id: 15,
@@ -133,6 +147,7 @@ export const candidates = [
     center: "Bauchi Technical College",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-05-18",
   },
   {
     id: 16,
@@ -142,6 +157,7 @@ export const candidates = [
     center: "OAU ICT Centre",
     status: "Failed",
     score: 120,
+    registeredAt: "2026-05-28",
   },
   {
     id: 17,
@@ -151,6 +167,7 @@ export const candidates = [
     center: "Maiduguri Secondary School",
     status: "Passed",
     score: 64,
+    registeredAt: "2026-06-07",
   },
   {
     id: 18,
@@ -160,6 +177,7 @@ export const candidates = [
     center: "Makurdi High School",
     status: "Passed",
     score: 70,
+    registeredAt: "2026-06-15",
   },
   {
     id: 19,
@@ -169,6 +187,7 @@ export const candidates = [
     center: "Lokoja Model College",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-06-25",
   },
   {
     id: 20,
@@ -178,6 +197,7 @@ export const candidates = [
     center: "GSU CBT Centre",
     status: "Passed",
     score: 290,
+    registeredAt: "2026-07-04",
   },
   {
     id: 21,
@@ -187,6 +207,7 @@ export const candidates = [
     center: "Abakaliki High School",
     status: "Failed",
     score: 48,
+    registeredAt: "2026-07-11",
   },
   {
     id: 22,
@@ -196,6 +217,7 @@ export const candidates = [
     center: "Ado Ekiti Technical",
     status: "Passed",
     score: 76,
+    registeredAt: "2026-07-19",
   },
   {
     id: 23,
@@ -205,6 +227,7 @@ export const candidates = [
     center: "Jalingo Model School",
     status: "Passed",
     score: 85,
+    registeredAt: "2026-07-28",
   },
   {
     id: 24,
@@ -214,6 +237,7 @@ export const candidates = [
     center: "FUTMINNA CBT Centre",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-08-05",
   },
   {
     id: 25,
@@ -223,6 +247,7 @@ export const candidates = [
     center: "Onitsha Grammar School",
     status: "Passed",
     score: 61,
+    registeredAt: "2026-08-16",
   },
   {
     id: 26,
@@ -232,6 +257,7 @@ export const candidates = [
     center: "CMS Grammar School",
     status: "Failed",
     score: 39,
+    registeredAt: "2026-08-25",
   },
   {
     id: 27,
@@ -241,6 +267,7 @@ export const candidates = [
     center: "Dutse Vocational Centre",
     status: "Passed",
     score: 55,
+    registeredAt: "2026-09-02",
   },
   {
     id: 28,
@@ -250,6 +277,7 @@ export const candidates = [
     center: "UNIBEN CBT Centre",
     status: "Passed",
     score: 230,
+    registeredAt: "2026-09-14",
   },
   {
     id: 29,
@@ -259,6 +287,7 @@ export const candidates = [
     center: "Nsukka High School",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-09-28",
   },
   {
     id: 30,
@@ -268,6 +297,7 @@ export const candidates = [
     center: "Damaturu Girls College",
     status: "Passed",
     score: 78,
+    registeredAt: "2026-10-06",
   },
   {
     id: 31,
@@ -277,6 +307,7 @@ export const candidates = [
     center: "UNIPORT CBT Centre",
     status: "Failed",
     score: 150,
+    registeredAt: "2026-10-14",
   },
   {
     id: 32,
@@ -286,6 +317,7 @@ export const candidates = [
     center: "Ilorin Technical College",
     status: "Passed",
     score: 69,
+    registeredAt: "2026-10-22",
   },
   {
     id: 33,
@@ -295,6 +327,7 @@ export const candidates = [
     center: "Calabar Model School",
     status: "Passed",
     score: 84,
+    registeredAt: "2026-10-29",
   },
   {
     id: 34,
@@ -304,6 +337,7 @@ export const candidates = [
     center: "Rumfa College",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-11-04",
   },
   {
     id: 35,
@@ -313,6 +347,7 @@ export const candidates = [
     center: "DELSU CBT Centre",
     status: "Passed",
     score: 275,
+    registeredAt: "2026-11-12",
   },
   {
     id: 36,
@@ -322,6 +357,7 @@ export const candidates = [
     center: "Loyola College",
     status: "Failed",
     score: 41,
+    registeredAt: "2026-11-26",
   },
   {
     id: 37,
@@ -331,6 +367,7 @@ export const candidates = [
     center: "Birnin Kebbi Tech",
     status: "Passed",
     score: 73,
+    registeredAt: "2026-12-05",
   },
   {
     id: 38,
@@ -340,6 +377,7 @@ export const candidates = [
     center: "Okigwe High School",
     status: "Passed",
     score: 66,
+    registeredAt: "2026-12-14",
   },
   {
     id: 39,
@@ -349,6 +387,7 @@ export const candidates = [
     center: "UNIUYO CBT Centre",
     status: "Pending",
     score: 0,
+    registeredAt: "2026-12-21",
   },
   {
     id: 40,
@@ -358,5 +397,6 @@ export const candidates = [
     center: "Ijebu Ode College",
     status: "Passed",
     score: 89,
-  }
+    registeredAt: "2026-12-29",
+  },
 ];

@@ -6,4 +6,5 @@ export type Candidate = {
   center: string;
   status: string;
   score: number;
+  registeredAt: string;
 };
