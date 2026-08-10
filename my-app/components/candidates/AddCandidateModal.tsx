@@ -10,11 +10,7 @@ type Props = {
   onAdd: (candidate: Candidate) => void;
 };
 
-export default function AddCandidateModal({
-  isOpen,
-  onClose,
-  onAdd,
-}: Props) {
+export default function AddCandidateModal({ isOpen, onClose, onAdd }: Props) {
   const [formData, setFormData] = useState<Candidate>({
     id: 0,
     name: "",
@@ -23,6 +19,7 @@ export default function AddCandidateModal({
     center: "",
     score: 0,
     status: "Pending",
+    registeredAt: new Date().toISOString().split("T")[0], // Default to today's date
   });
 
   const [firstName, setFirstName] = useState("");
@@ -46,6 +43,7 @@ export default function AddCandidateModal({
       center: "",
       score: 0,
       status: "Pending",
+      registeredAt: new Date().toISOString().split("T")[0],
     });
 
     setErrors({
@@ -95,10 +93,7 @@ export default function AddCandidateModal({
       newErrors.center = "Center is required.";
     }
 
-    if (
-      formData.status !== "Pending" &&
-      (formData.score < 0 || formData.score > 100)
-    ) {
+    if (formData.score < 0 || formData.score > 100) {
       newErrors.score = "Score must be between 0 and 100.";
     }
 
@@ -153,9 +148,7 @@ export default function AddCandidateModal({
                 />
 
                 {errors.firstName && (
-                  <p className="text-xs text-red-500">
-                    {errors.firstName}
-                  </p>
+                  <p className="text-xs text-red-500">{errors.firstName}</p>
                 )}
               </div>
 
@@ -170,9 +163,7 @@ export default function AddCandidateModal({
                 />
 
                 {errors.lastName && (
-                  <p className="text-xs text-red-500">
-                    {errors.lastName}
-                  </p>
+                  <p className="text-xs text-red-500">{errors.lastName}</p>
                 )}
               </div>
             </div>
@@ -195,9 +186,7 @@ export default function AddCandidateModal({
                 />
 
                 {errors.exam && (
-                  <p className="text-xs text-red-500">
-                    {errors.exam}
-                  </p>
+                  <p className="text-xs text-red-500">{errors.exam}</p>
                 )}
               </div>
 
@@ -217,9 +206,7 @@ export default function AddCandidateModal({
                 />
 
                 {errors.state && (
-                  <p className="text-xs text-red-500">
-                    {errors.state}
-                  </p>
+                  <p className="text-xs text-red-500">{errors.state}</p>
                 )}
               </div>
             </div>
@@ -262,9 +249,7 @@ export default function AddCandidateModal({
                 />
 
                 {errors.score && (
-                  <p className="text-xs text-red-500">
-                    {errors.score}
-                  </p>
+                  <p className="text-xs text-red-500">{errors.score}</p>
                 )}
               </div>
             </div>
@@ -287,9 +272,7 @@ export default function AddCandidateModal({
               />
 
               {errors.center && (
-                <p className="text-xs text-red-500">
-                  {errors.center}
-                </p>
+                <p className="text-xs text-red-500">{errors.center}</p>
               )}
             </div>
           </div>
