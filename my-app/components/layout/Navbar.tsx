@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 
@@ -19,6 +21,9 @@ export default function Navbar() {
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
+  // const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <>
@@ -51,9 +56,7 @@ shadow-xl shadow-black/20
           </button>
 
           <div>
-            <h1 className="font-bold text-lg hidden sm:block">
-              WAEC Dashboard
-            </h1>
+            <h1 className="font-bold text-lg hidden sm:block">Dashboard</h1>
 
             <p className="text-xs opacity-60 hidden md:block">
               National Examination Administration
@@ -118,9 +121,16 @@ shadow-xl shadow-black/20
 
             {settingsOpen && (
               <div className="absolute right-0 top-12 w-52 rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-xl p-2 z-50">
-                <button className="w-full text-left p-2 rounded-lg hover:bg-[var(--muted)]">
+                <Link
+                  href="/settings"
+                  onClick={() => {
+                    setSettingsOpen((open) => !open);
+                    setProfileOpen(false);
+                  }}
+                  className="block w-full text-left p-2 rounded-lg hover:bg-[var(--muted)]"
+                >
                   ⚙ General Settings
-                </button>
+                </Link>
 
                 <button className="w-full text-left p-2 rounded-lg hover:bg-[var(--muted)]">
                   🌙 Appearance
@@ -164,9 +174,16 @@ shadow-xl shadow-black/20
                   </p>
                 </div>
 
-                <button className="w-full text-left p-3 hover:bg-[var(--muted)]">
+                <Link
+                  href="/settings"
+                  onClick={() => {
+                    setProfileOpen((open) => !open);
+                    setSettingsOpen(false);
+                  }}
+                  className="block w-full text-left p-3 hover:bg-[var(--muted)]"
+                >
                   👤 My Profile
-                </button>
+                </Link>
 
                 <button className="w-full text-left p-3 hover:bg-[var(--muted)]">
                   📊 Dashboard Preferences
@@ -176,16 +193,27 @@ shadow-xl shadow-black/20
                   🔔 Notifications
                 </button>
 
-                <button className="w-full text-left p-3 hover:bg-[var(--muted)]">
+                <Link
+                  href="/dashboard"
+                  onClick={() => setProfileOpen(false)}
+                  className="block w-full text-left p-3 hover:bg-[var(--muted)]"
+                >
                   📄 Activity Log
-                </button>
+                </Link>
 
                 <button className="w-full text-left p-3 hover:bg-[var(--muted)]">
                   ❓ Help Center
                 </button>
 
                 <div className="border-t border-[var(--border)]">
-                  <button className="w-full text-left p-3 hover:bg-red-500/20 text-red-400">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setProfileOpen(false);
+                      router.push("/");
+                    }}
+                    className="w-full text-left p-3 hover:bg-red-500/20 text-red-400"
+                  >
                     🚪 Logout
                   </button>
                 </div>

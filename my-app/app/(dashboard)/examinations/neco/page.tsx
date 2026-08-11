@@ -1,15 +1,22 @@
-import ActiveUsersCard from "@/components/examinations/waec/ActiveUserCard";
-import NigeriaMap from "@/components/examinations/waec/NigeriaMap";
-import PerformanceCard from "@/components/examinations/waec/PerformanceCard";
-import PerformanceChart from "@/components/examinations/waec/PerformanceChart";
-import RecentActivity from "@/components/examinations/waec/RecentActivity";
-import StatCard from "@/components/examinations/waec/StatCard";
-import TrackingCard from "@/components/examinations/waec/TrackingCard";
-import WelcomeCard from "@/components/examinations/waec/WelcomeCard";
+import ActiveUsersCard from "@/components/examinations/ActiveUserCard";
+import NigeriaMap from "@/components/examinations/NigeriaMap";
+import PerformanceCard from "@/components/examinations/PerformanceCard";
+import PerformanceChart from "@/components/examinations/PerformanceChart";
+import RecentActivity from "@/components/examinations/RecentActivity";
+import StatCard from "@/components/examinations/StatCard";
+import TrackingCard from "@/components/examinations/TrackingCard";
+import WelcomeCard from "@/components/examinations/WelcomeCard";
 import { getDashboardData } from "@/components/services/dashboard";
+import { examinations } from "@/lib/data/examinations";
 
-export default async function WaecPage() {
-  const dashboard = await getDashboardData();
+export default async function NecoPage() {
+  const dashboard = await getDashboardData("NECO");
+
+  const examination = examinations.find((exam) => exam.name === "NECO");
+
+  if (!examination) {
+    throw new Error("NECO examination configuration not found");
+  }
 
   return (
     <div className="space-y-4 w-full px-4 overflow-x-hidden">
@@ -17,23 +24,23 @@ export default async function WaecPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           title="Candidates"
-          value="1.2M"
-          change="+12%"
-          icon="users"
-          color="#2563EB"
-        />
-
-        <StatCard
-          title="Centers"
-          value="2,847"
+          value={dashboard.stats.candidates.toLocaleString()}
           change="+5%"
-          icon="building"
+          icon="users"
           color="#06B6D4"
         />
 
         <StatCard
+          title="Centres"
+          value={dashboard.stats.centres.toLocaleString()}
+          change="+5%"
+          icon="building"
+          color="#8B5CF6"
+        />
+
+        <StatCard
           title="Exams"
-          value="156"
+          value={dashboard.stats.exams.toLocaleString()}
           change="+8%"
           icon="exam"
           color="#8B5CF6"
@@ -41,7 +48,7 @@ export default async function WaecPage() {
 
         <StatCard
           title="Pass Rate"
-          value="78%"
+          value={`${dashboard.stats.passRate}%`}
           change="+3%"
           icon="award"
           color="#10B981"
@@ -51,7 +58,7 @@ export default async function WaecPage() {
       {/* 🟣 ROW 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         <div className="lg:col-span-5">
-          <WelcomeCard />
+          <WelcomeCard examination={examination!} candidates={824000} />
         </div>
 
         <div className="lg:col-span-3">
@@ -64,20 +71,23 @@ export default async function WaecPage() {
       </div>
 
       {/* 🟢 ROW 3 */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <div className="lg:col-span-8">
-          <NigeriaMap />
-        </div>
+       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+              <div className="lg:col-span-8 h-[530px]">
+                <NigeriaMap examination={examination.name} mapData={dashboard.map} />
+              </div>
 
-        <div className="lg:col-span-4">
-          <ActiveUsersCard activeUsers={dashboard.activeUsers} />
-        </div>
-      </div>
+              <div className="lg:col-span-4 h-[530px]">
+                <ActiveUsersCard activeUsers={dashboard.activeUsers} />
+              </div>
+            </div>
 
       {/* 🟣 ROW 4 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         <div className="lg:col-span-8">
-          <PerformanceChart performanceChart={dashboard.performanceChart} />
+          <PerformanceChart
+            examination="NECO"
+            performanceChart={dashboard.performanceChart}
+          />
         </div>
 
         <div className="lg:col-span-4">
