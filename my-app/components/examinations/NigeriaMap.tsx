@@ -72,7 +72,7 @@ export default function NigeriaMap({ examination, mapData }: NigeriaMapProps) {
         >
           <ZoomableGroup center={[8.5, 9.2]} zoom={1.89}>
             <Geographies geography={geoData}>
-              {({ geographies }) =>
+              {({ geographies }: { geographies: any[] }) =>
                 geographies
                   .filter((geo) => {
                     const name = geo.properties?.name || geo.properties?.NAME;
