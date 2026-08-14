@@ -40,7 +40,10 @@ export default function NigeriaMap({ examination, mapData }: NigeriaMapProps) {
   return (
     <div className="h-full min-h-[400px] rounded-2xl border border-[var(--border)] bg-[var(--card)] overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4">
+      <div
+        className="flex items-center justify-between px-5 py-4  flex-col gap-3 sm:flex-row
+    sm:items-start sm:justify-between sm:gap-4"
+      >
         <div>
           <p className="text-xs uppercase tracking-wider text-slate-400">
             Geographic Overview
@@ -53,7 +56,7 @@ export default function NigeriaMap({ examination, mapData }: NigeriaMapProps) {
           </p>
         </div>
 
-        <div className="rounded-full bg-cyan-500/10 px-3 py-1">
+        <div className="self-start rounded-full bg-cyan-500/10 px-3 py-1 sm:shrink-0">
           <span className="text-xs text-cyan-400">
             {mapData.length} locations
           </span>
@@ -61,7 +64,7 @@ export default function NigeriaMap({ examination, mapData }: NigeriaMapProps) {
       </div>
 
       {/* Map */}
-      <div className="relative h-[430px]">
+      <div className="relative h-65 sm:h-[360px] md:h-[430px]">
         <ComposableMap
           projection="geoMercator"
           projectionConfig={{
@@ -207,12 +210,12 @@ export default function NigeriaMap({ examination, mapData }: NigeriaMapProps) {
         </ComposableMap>
 
         {/* Legend */}
-        <div className="absolute bottom-4 left-4 rounded-xl border border-white/10 bg-slate-950/80 backdrop-blur-md px-3 py-2">
-          <p className="text-[10px] uppercase tracking-wider text-slate-500">
+        <div className="absolute hidden md:block rounded-xl border border-white/10 bg-slate-950/80 px-2.5 py-1.5 backdrop-blur-md sm:bottom-4 sm:left-4 sm:px-3 sm:py-2">
+          <p className="text-[9px] uppercase tracking-wider text-slate-500 sm:text-[10px]">
             Marker size
           </p>
 
-          <p className="text-xs text-slate-300 mt-1">
+          <p className="md:mt-1 text-[10px] text-slate-300 sm:text-xs">
             Larger = more candidates
           </p>
         </div>

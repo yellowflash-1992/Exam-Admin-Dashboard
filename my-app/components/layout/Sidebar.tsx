@@ -1,13 +1,18 @@
 "use client";
 
-import Link from "next/link";
 import SidebarSection from "@/components/layout/SidebarSection";
 import { sidebarMenu } from "@/lib/data/sidebar";
 import { LogOut, Settings } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export default function Sidebar() {
+type SidebarProps = {
+  onNavigate?: () => void;
+  mobile?: boolean;
+};
+
+export default function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   const [examOpen, setExamOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
   const pathname = usePathname();
@@ -15,9 +20,9 @@ export default function Sidebar() {
   const settingsActive = pathname === "/settings";
 
   return (
-    <div className="
-        hidden
-        md:flex
+    <div
+      className={`
+        ${mobile ? "flex md:hidden" : "hidden md:flex"}
         w-64
         p-4
         shrink-0
@@ -25,15 +30,16 @@ export default function Sidebar() {
         bg-[var(--card)]
         border-r
         border-[var(--border)]
-        overflow-y-auto
-      ">
+        ${mobile ? "overflow-y-auto max-h-[calc(100dvh-5rem)]" : "overflow-y-auto"}
+min-h-0
+        
+      `}
+    >
       {/* Logo */}
       <div className="mb-8">
         <h1 className="text-xl font-bold">Exam Admin</h1>
 
-        <p className="text-xs opacity-50 mt-1">
-          National Examination System
-        </p>
+        <p className="text-xs opacity-50 mt-1">National Examination System</p>
       </div>
 
       {/* Navigation */}
@@ -46,6 +52,7 @@ export default function Sidebar() {
             setExamOpen={setExamOpen}
             activeMenu={activeMenu}
             setActiveMenu={setActiveMenu}
+            onNavigate={onNavigate}
           />
         ))}
       </nav>
@@ -55,6 +62,7 @@ export default function Sidebar() {
         {/* Settings */}
         <Link
           href="/settings"
+          onClick={onNavigate}
           className={`
             flex
             items-center

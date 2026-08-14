@@ -11,6 +11,7 @@ interface Props {
   setExamOpen: React.Dispatch<React.SetStateAction<boolean>>;
   activeMenu: string;
   setActiveMenu: React.Dispatch<React.SetStateAction<string>>;
+  onNavigate?: () => void;
 }
 
 export default function SidebarItem({
@@ -19,6 +20,7 @@ export default function SidebarItem({
   setExamOpen,
   activeMenu,
   setActiveMenu,
+  onNavigate,
 }: Props) {
   const pathname = usePathname();
 
@@ -69,6 +71,7 @@ export default function SidebarItem({
               onClick={() => {
                 setExamOpen(true);
                 setActiveMenu(child.name);
+                onNavigate?.();
               }}
               className={`
                 flex items-center gap-3
@@ -101,8 +104,7 @@ export default function SidebarItem({
    * Examination dropdown is being interacted with.
    */
   const isActive =
-    activeMenu === item.name ||
-    (activeMenu === "" && pathname === item.href);
+    activeMenu === item.name || (activeMenu === "" && pathname === item.href);
 
   return (
     <Link
@@ -110,6 +112,7 @@ export default function SidebarItem({
       onClick={() => {
         setActiveMenu(item.name);
         setExamOpen(false);
+        onNavigate?.();
       }}
       className={`
         flex items-center gap-3

@@ -12,51 +12,89 @@ export default function WelcomeCard({
   candidates = 0,
 }: WelcomeCardProps) {
   return (
-    <div className="space-y-6">
+    <div className="md:h-[300px] md:space-y-5">
       {/* TOP CARD */}
       <div
         className="
           relative
-          rounded-3xl
           overflow-hidden
-          border border-cyan-500/20
+          rounded-3xl
+          border
+          border-cyan-500/20
           bg-gradient-to-br
           from-[#0F3D56]
           via-[#0B5CAD]
           to-[#112240]
-          px-3
-          py-6
+          px-4
+          py-3
+          sm:px-5
+          z-10
+    grid
+    grid-cols-[1fr_auto]
+    gap-x-4
+    gap-y-3
+    md:flex
+    md:items-start
+    md:justify-between
         "
       >
         {/* Decoration */}
-        <div className="absolute -right-10 -top-10 w-20 h-40 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-3xl" />
 
-        <div className="relative z-10 flex justify-between gap-4">
+        <div
+          className="
+            relative
+            z-10
+            flex
+            flex-col
+            gap-6
+            md:flex-row
+            md:items-start
+            md:justify-between
+            md:gap-4
+          "
+        >
           {/* LEFT */}
           <div className="min-w-0">
-            <div className="flex items-center gap-2 text-cyan-100">
-              <ShieldCheck size={16} />
+            <div className="flex items-center gap-2 text-sm text-cyan-100">
+              <ShieldCheck size={16} className="shrink-0" />
 
               <span>{examination.name} Administration</span>
             </div>
 
-            <h1 className="mt-4 text-4xl font-bold whitespace-nowrap flex items-center gap-2">
+            <h1
+              className="
+                mt-1.5
+                text-3xl
+                font-bold
+                leading-tight
+                sm:text-4xl
+              "
+            >
               Good Morning
             </h1>
 
-            <p className="mt-5 text-cyan-100">
+            <p className="mt-1.5 max-w-xl text-sm leading-5 text-cyan-100 sm:text-base">
               {candidates.toLocaleString()} candidates registered for the{" "}
               {examination.name} examination cycle.
             </p>
           </div>
 
           {/* RIGHT */}
-          <div className="text-right shrink-0">
-            <p className="text-5xl font-bold">08:42</p>
+          <div
+            className="
+              shrink-0
+              text-left
+              md:text-right
+            "
+          >
+            <p className="text-4xl font-bold sm:text-5xl">08:42</p>
 
-            <p>Friday</p>
+            <p className="mt-1 text-sm">Friday</p>
 
-            <p className="text-sm">Abuja • 28°C</p>
+            <p className="mt-1 text-xs text-cyan-100 sm:text-sm">
+              Abuja • 28°C
+            </p>
           </div>
         </div>
       </div>
@@ -65,20 +103,24 @@ export default function WelcomeCard({
       <div
         className="
           rounded-3xl
-          border border-white/10
+          border
+          border-white/10
           bg-white/5
+          p-4
           backdrop-blur-md
-          mt-
-          p-5
+          sm:px-5
+          sm:py-3
+          hidden
+          md:block
         "
       >
-        <div className="flex items-center gap-3">
-          <CalendarDays size={18} className="text-cyan-400" />
+        <div className="flex items-start gap-3">
+          <CalendarDays size={18} className="mt-0.5 shrink-0 text-cyan-400" />
 
-          <div>
+          <div className="min-w-0">
             <p className="text-sm font-semibold">{examination.status}</p>
 
-            <p className="text-xs opacity-50">
+            <p className="mt-1 text-xs leading-5 opacity-50">
               {examination.dateLabel}: {examination.date}
             </p>
           </div>

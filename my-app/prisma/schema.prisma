@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Examination {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  code        String   @unique
+  status      String
+  date        DateTime?
+  dateLabel   String?
+  description String?
+
+  registrations ExaminationRegistration[]
+  results       Result[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Candidate {
+  id          Int      @id @default(autoincrement())
+  candidateNo String   @unique
+  firstName   String
+  middleName  String?
+  lastName    String
+  email       String?
+  phone       String?
+  dateOfBirth DateTime?
+  gender      String?
+  state       String?
+
+  registrations ExaminationRegistration[]
+  results       Result[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExaminationCentre {
+  id        Int     @id @default(autoincrement())
+  code      String  @unique
+  name      String
+  state     String
+  city      String
+  address   String?
+  capacity  Int?
+  latitude  Float?
+  longitude Float?
+
+  registrations ExaminationRegistration[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExaminationRegistration {
+  id           Int @id @default(autoincrement())
+  candidateId  Int
+  examinationId Int
+  centreId     Int?
+
+  registrationNo String?
+  status         String @default("registered")
+
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  examination Examination @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+  centre      ExaminationCentre? @relation(fields: [centreId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([candidateId, examinationId])
+}
+
+model Result {
+  id           Int @id @default(autoincrement())
+  candidateId  Int
+  examinationId Int
+
+  score        Float?
+  grade        String?
+  status       String @default("pending")
+
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  examination Examination @relation(fields: [examinationId], references: [id], onDelete: Cascade)
+
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([candidateId, examinationId])
+}

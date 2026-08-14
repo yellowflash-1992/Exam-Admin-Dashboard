@@ -71,15 +71,15 @@ export default async function NecoPage() {
       </div>
 
       {/* 🟢 ROW 3 */}
-       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-              <div className="lg:col-span-8 h-[530px]">
-                <NigeriaMap examination={examination.name} mapData={dashboard.map} />
-              </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+        <div className="lg:col-span-8 md:h-[530px]">
+          <NigeriaMap examination={examination.name} mapData={dashboard.map} />
+        </div>
 
-              <div className="lg:col-span-4 h-[530px]">
-                <ActiveUsersCard activeUsers={dashboard.activeUsers} />
-              </div>
-            </div>
+        <div className="lg:col-span-4 md:h-[530px]">
+          <ActiveUsersCard activeUsers={dashboard.activeUsers} />
+        </div>
+      </div>
 
       {/* 🟣 ROW 4 */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">

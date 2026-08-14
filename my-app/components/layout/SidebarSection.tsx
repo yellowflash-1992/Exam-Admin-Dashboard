@@ -9,6 +9,7 @@ interface Props {
   setExamOpen: React.Dispatch<React.SetStateAction<boolean>>;
   activeMenu: string;
   setActiveMenu: React.Dispatch<React.SetStateAction<string>>;
+  onNavigate?: () => void;
 }
 
 export default function SidebarSection({
@@ -17,6 +18,7 @@ export default function SidebarSection({
   setExamOpen,
   activeMenu,
   setActiveMenu,
+  onNavigate,
 }: Props) {
   return (
     <div>
@@ -33,6 +35,7 @@ export default function SidebarSection({
             setExamOpen={setExamOpen}
             activeMenu={activeMenu}
             setActiveMenu={setActiveMenu}
+            onNavigate={onNavigate}
           />
         ))}
       </div>

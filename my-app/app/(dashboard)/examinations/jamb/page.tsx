@@ -72,11 +72,11 @@ export default async function JambPage() {
 
       {/* 🟢 ROW 3 */}
        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-              <div className="lg:col-span-8 h-[530px]">
+              <div className="lg:col-span-8 md:h-[530px]">
                 <NigeriaMap examination={examination.name} mapData={dashboard.map} />
               </div>
 
-              <div className="lg:col-span-4 h-[530px]">
+              <div className="lg:col-span-4 md:h-[530px]">
                 <ActiveUsersCard activeUsers={dashboard.activeUsers} />
               </div>
             </div>
