@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-
+  // Keep Next.js in server mode so API routes and runtime data work during deploy.
   basePath:
     process.env.NODE_ENV === "production" ? "/Exam-Admin-Dashboard" : "",
 

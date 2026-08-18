@@ -5,7 +5,7 @@ import { PrismaClient } from "@/lib/generated/prisma/client";
 const connectionString = process.env.DIRECT_DATABASE_URL;
 
 if (!connectionString) {
-  throw new Error("DATABASE_URL is not defined");
+  throw new Error("DIRECT_DATABASE_URL is not defined");
 }
 
 const adapter = new PrismaPg({

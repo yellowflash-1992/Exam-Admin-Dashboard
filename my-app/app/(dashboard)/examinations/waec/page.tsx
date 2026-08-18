@@ -9,6 +9,8 @@ import WelcomeCard from "@/components/examinations/WelcomeCard";
 import { getDashboardData } from "@/components/services/dashboard";
 import { examinations } from "@/lib/data/examinations";
 
+export const dynamic = "force-dynamic";
+
 export default async function WaecPage() {
   const dashboard = await getDashboardData("WAEC");
 
