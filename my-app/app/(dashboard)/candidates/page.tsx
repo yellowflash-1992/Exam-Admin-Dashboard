@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // import AddCandidateModal from "@/components/candidates/AddCandidateModal";
 import CandidateFilters from "@/components/candidates/CandidateFilters";
@@ -21,9 +21,15 @@ import type { Candidate } from "@/lib/types/candidate";
 // ];
 
 export default function CandidatesPage() {
+  const loadCandidates = useCandidateStore((state) => state.loadCandidates);
+
   // const addCandidateOpen = useUIStore((state) => state.addCandidateOpen);
 
   const openAddCandidate = useUIStore((state) => state.openAddCandidate);
+
+  useEffect(() => {
+    void loadCandidates();
+  }, [loadCandidates]);
 
   // const closeAddCandidate = useUIStore((state) => state.closeAddCandidate);
 

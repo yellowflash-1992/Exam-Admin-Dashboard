@@ -1,7 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
+// prisma/schema.prisma
 
 generator client {
   provider = "prisma-client"
@@ -47,6 +44,21 @@ model Candidate {
   updatedAt DateTime @updatedAt
 }
 
+model User {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  email         String   @unique
+  fullName      String
+  role          String   @default("user")
+  passwordHash  String
+  theme         String   @default("dark")
+  notifications Boolean  @default(true)
+  emailAlerts   Boolean  @default(true)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 model ExaminationCentre {
   id        Int     @id @default(autoincrement())
   code      String  @unique
@@ -65,10 +77,10 @@ model ExaminationCentre {
 }
 
 model ExaminationRegistration {
-  id           Int @id @default(autoincrement())
-  candidateId  Int
-  examinationId Int
-  centreId     Int?
+  id              Int @id @default(autoincrement())
+  candidateId     Int
+  examinationId   Int
+  centreId        Int?
 
   registrationNo String?
   status         String @default("registered")

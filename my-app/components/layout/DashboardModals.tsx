@@ -2,6 +2,8 @@
 
 import AddCandidateModal from "@/components/candidates/AddCandidateModal";
 import AddCentreModal from "@/components/centres/AddCentreModal";
+import CreateExamModal from "@/components/examinations/CreateExamModal";
+import UploadResultsModal from "@/components/results/UploadResultsModal";
 import { useCandidateStore } from "@/lib/stores/candidateStore";
 import { useCentreStore } from "@/lib/stores/centreStore";
 import { useUIStore } from "@/lib/stores/uiStore";
@@ -18,6 +20,11 @@ export default function DashboardModals() {
   const closeAddCentre = useUIStore((state) => state.closeAddCentre);
 
   const addCentre = useCentreStore((state) => state.addCentre);
+
+  const createExamOpen = useUIStore((state) => state.createExamOpen);
+  const closeCreateExam = useUIStore((state) => state.closeCreateExam);
+  const uploadResultsOpen = useUIStore((state) => state.uploadResultsOpen);
+  const closeUploadResults = useUIStore((state) => state.closeUploadResults);
 
   return (
     <>
@@ -37,6 +44,12 @@ export default function DashboardModals() {
           addCentre(centre);
           closeAddCentre();
         }}
+      />
+
+      <CreateExamModal isOpen={createExamOpen} onClose={closeCreateExam} />
+      <UploadResultsModal
+        isOpen={uploadResultsOpen}
+        onClose={closeUploadResults}
       />
     </>
   );

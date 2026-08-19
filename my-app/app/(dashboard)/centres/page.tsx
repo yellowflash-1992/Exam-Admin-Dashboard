@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CentreFilters from "@/components/centres/CentreFilters";
 import CentreModal from "@/components/centres/CentreModal";
@@ -17,7 +17,13 @@ import { useUIStore } from "@/lib/stores/uiStore";
 import type { Centre } from "@/lib/types/centre";
 
 export default function CentresPage() {
+  const loadCentres = useCentreStore((state) => state.loadCentres);
+
   const openAddCentre = useUIStore((state) => state.openAddCentre);
+
+  useEffect(() => {
+    void loadCentres();
+  }, [loadCentres]);
 
   const centres = useCentreStore((state) => state.centres);
 

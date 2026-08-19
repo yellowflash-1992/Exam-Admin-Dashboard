@@ -1,15 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Bell,
-  Check,
-  Moon,
-  Save,
-  Shield,
-  Sun,
-  User,
-} from "lucide-react";
+import { Bell, Check, Moon, Save, Shield, Sun, User } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import PageHeader from "@/components/layout/PageHeader";
 import Card from "@/components/ui/Card";
 
@@ -18,9 +11,77 @@ export default function SettingsPage() {
   const [notifications, setNotifications] = useState(true);
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [saved, setSaved] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleSave = () => {
+  useEffect(() => {
+    async function loadSettings() {
+      const response = await fetch("/api/settings");
+      if (!response.ok) {
+        setLoading(false);
+        return;
+      }
+
+      const data = (await response.json()) as {
+        user?: {
+          theme?: "dark" | "light";
+          notifications?: boolean;
+          emailAlerts?: boolean;
+          fullName?: string;
+          email?: string;
+          role?: string;
+        };
+      };
+
+      if (data.user) {
+        const isDark = data.user.theme !== "light";
+        setDarkMode(isDark);
+        setNotifications(data.user.notifications ?? true);
+        setEmailAlerts(data.user.emailAlerts ?? true);
+      }
+
+      setLoading(false);
+    }
+
+    void loadSettings();
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--background",
+      darkMode ? "#0B1220" : "#f8fafc",
+    );
+    document.documentElement.style.setProperty(
+      "--foreground",
+      darkMode ? "#E5E7EB" : "#0f172a",
+    );
+    document.documentElement.style.setProperty(
+      "--card",
+      darkMode ? "#111827" : "#ffffff",
+    );
+    document.documentElement.style.setProperty(
+      "--muted",
+      darkMode ? "#1A2332" : "#e2e8f0",
+    );
+    document.documentElement.style.setProperty(
+      "--border",
+      darkMode ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.12)",
+    );
+  }, [darkMode]);
+
+  const handleSave = async () => {
     setSaved(true);
+
+    await fetch("/api/settings", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        theme: darkMode ? "dark" : "light",
+        notifications,
+        emailAlerts,
+      }),
+    });
 
     setTimeout(() => {
       setSaved(false);
@@ -49,19 +110,22 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="font-medium">Dark mode</p>
-              <p className="text-sm opacity-50">
-                Use the dark dashboard appearance.
-              </p>
-            </div>
+        {loading ? (
+          <div className="text-sm opacity-60">Loading theme settings...</div>
+        ) : (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="font-medium">Dark mode</p>
+                <p className="text-sm opacity-50">
+                  Use the dark dashboard appearance.
+                </p>
+              </div>
 
-            <button
-              type="button"
-              onClick={() => setDarkMode((value) => !value)}
-              className={`
+              <button
+                type="button"
+                onClick={() => setDarkMode((value) => !value)}
+                className={`
                 relative
                 w-12
                 h-6
@@ -69,9 +133,9 @@ export default function SettingsPage() {
                 transition
                 ${darkMode ? "bg-cyan-500" : "bg-slate-500"}
               `}
-            >
-              <span
-                className={`
+              >
+                <span
+                  className={`
                   absolute
                   top-1
                   w-4
@@ -81,15 +145,15 @@ export default function SettingsPage() {
                   transition
                   ${darkMode ? "left-7" : "left-1"}
                 `}
-              />
-            </button>
-          </div>
+                />
+              </button>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button
-              type="button"
-              onClick={() => setDarkMode(false)}
-              className={`
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button
+                type="button"
+                onClick={() => setDarkMode(false)}
+                className={`
                 flex items-center gap-3 rounded-xl border p-4 text-left
                 transition
                 ${
@@ -98,25 +162,25 @@ export default function SettingsPage() {
                     : "border-[var(--border)] hover:bg-[var(--muted)]"
                 }
               `}
-            >
-              <Sun size={20} />
+              >
+                <Sun size={20} />
 
-              <div>
-                <p className="font-medium">Light</p>
-                <p className="text-xs opacity-50">
-                  Light dashboard appearance
-                </p>
-              </div>
+                <div>
+                  <p className="font-medium">Light</p>
+                  <p className="text-xs opacity-50">
+                    Light dashboard appearance
+                  </p>
+                </div>
 
-              {!darkMode && (
-                <Check size={17} className="ml-auto text-cyan-400" />
-              )}
-            </button>
+                {!darkMode && (
+                  <Check size={17} className="ml-auto text-cyan-400" />
+                )}
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setDarkMode(true)}
-              className={`
+              <button
+                type="button"
+                onClick={() => setDarkMode(true)}
+                className={`
                 flex items-center gap-3 rounded-xl border p-4 text-left
                 transition
                 ${
@@ -125,22 +189,23 @@ export default function SettingsPage() {
                     : "border-[var(--border)] hover:bg-[var(--muted)]"
                 }
               `}
-            >
-              <Moon size={20} />
+              >
+                <Moon size={20} />
 
-              <div>
-                <p className="font-medium">Dark</p>
-                <p className="text-xs opacity-50">
-                  Dark dashboard appearance
-                </p>
-              </div>
+                <div>
+                  <p className="font-medium">Dark</p>
+                  <p className="text-xs opacity-50">
+                    Dark dashboard appearance
+                  </p>
+                </div>
 
-              {darkMode && (
-                <Check size={17} className="ml-auto text-cyan-400" />
-              )}
-            </button>
+                {darkMode && (
+                  <Check size={17} className="ml-auto text-cyan-400" />
+                )}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </Card>
 
       {/* Notifications */}
@@ -240,13 +305,10 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <button
-          type="button"
-          disabled
-          className="rounded-xl border border-[var(--border)] px-4 py-2 text-sm opacity-50 cursor-not-allowed"
-        >
-          Change Password
-        </button>
+        <div className="text-sm opacity-70">
+          Security controls are connected to the active authenticated user
+          session.
+        </div>
       </Card>
 
       {/* Save */}

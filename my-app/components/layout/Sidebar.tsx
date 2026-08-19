@@ -1,11 +1,12 @@
 "use client";
 
-import SidebarSection from "@/components/layout/SidebarSection";
-import { sidebarMenu } from "@/lib/data/sidebar";
 import { LogOut, Settings } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+
+import SidebarSection from "@/components/layout/SidebarSection";
+import { sidebarMenu } from "@/lib/data/sidebar";
 
 type SidebarProps = {
   onNavigate?: () => void;
@@ -16,8 +17,15 @@ export default function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   const [examOpen, setExamOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
 
   const settingsActive = pathname === "/settings";
+
+  const handleLogout = async () => {
+    await fetch("/api/auth", { method: "DELETE" });
+    router.push("/login");
+    router.refresh();
+  };
 
   return (
     <div
@@ -32,7 +40,7 @@ export default function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
         border-[var(--border)]
         ${mobile ? "overflow-y-auto max-h-[calc(100dvh-5rem)]" : "overflow-y-auto"}
 min-h-0
-        
+
       `}
     >
       {/* Logo */}
@@ -87,6 +95,7 @@ min-h-0
         {/* Logout */}
         <button
           type="button"
+          onClick={handleLogout}
           className="
             flex
             items-center

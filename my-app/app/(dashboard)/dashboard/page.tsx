@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 import AttentionRequired from "@/components/dashboard/AttentionRequired";
 import ExaminationStatus from "@/components/dashboard/ExaminationStatus";
 import QuickActions from "@/components/dashboard/QuickActions";
@@ -14,6 +16,14 @@ import { useOfficialStore } from "@/lib/stores/officialStore";
 import { Building2, FileCheck, UserCog, Users } from "lucide-react";
 
 export default function DashboardPage() {
+  const loadCandidates = useCandidateStore((state) => state.loadCandidates);
+  const loadCentres = useCentreStore((state) => state.loadCentres);
+
+  useEffect(() => {
+    void loadCandidates();
+    void loadCentres();
+  }, [loadCandidates, loadCentres]);
+
   const candidates = useCandidateStore((state) => state.candidates);
 
   const centres = useCentreStore((state) => state.centres);

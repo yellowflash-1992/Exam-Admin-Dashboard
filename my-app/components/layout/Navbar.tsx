@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 import Sidebar from "./Sidebar";
 
 import {
@@ -16,14 +17,28 @@ import {
   UserCircle,
 } from "lucide-react";
 
-export default function Navbar() {
+type NavbarProps = {
+  user?: {
+    username?: string | null;
+    email?: string | null;
+    fullName?: string | null;
+    role?: string | null;
+  };
+};
+
+export default function Navbar({ user }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  // const pathname = usePathname();
   const router = useRouter();
+
+  const handleLogout = async () => {
+    await fetch("/api/auth", { method: "DELETE" });
+    router.push("/login");
+    router.refresh();
+  };
 
   return (
     <>
@@ -174,9 +189,13 @@ shadow-xl shadow-black/20
               <UserCircle size={36} className="text-cyan-400" />
 
               <div className="hidden lg:block text-left">
-                <p className="font-semibold text-sm">Super Admin</p>
+                <p className="font-semibold text-sm">
+                  {user?.fullName || user?.username || "Administrator"}
+                </p>
 
-                <p className="text-xs opacity-60">admin@waec.gov.ng</p>
+                <p className="text-xs opacity-60">
+                  {user?.email || "admin@waec.gov.ng"}
+                </p>
               </div>
 
               <ChevronDown size={16} />
@@ -228,7 +247,7 @@ shadow-xl shadow-black/20
                     type="button"
                     onClick={() => {
                       setProfileOpen(false);
-                      router.push("/");
+                      void handleLogout();
                     }}
                     className="w-full text-left p-3 hover:bg-red-500/20 text-red-400"
                   >
