@@ -11,7 +11,13 @@ export default function SettingsPage() {
   const [notifications, setNotifications] = useState(true);
   const [emailAlerts, setEmailAlerts] = useState(true);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState({
+    fullName: "User",
+    email: "",
+    role: "user",
+  });
 
   useEffect(() => {
     async function loadSettings() {
@@ -33,6 +39,11 @@ export default function SettingsPage() {
       };
 
       if (data.user) {
+        setProfile({
+          fullName: data.user.fullName || "User",
+          email: data.user.email || "",
+          role: data.user.role || "user",
+        });
         const isDark = data.user.theme !== "light";
         setDarkMode(isDark);
         setNotifications(data.user.notifications ?? true);
@@ -69,23 +80,27 @@ export default function SettingsPage() {
   }, [darkMode]);
 
   const handleSave = async () => {
-    setSaved(true);
+    setSaveError("");
 
-    await fetch("/api/settings", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        theme: darkMode ? "dark" : "light",
-        notifications,
-        emailAlerts,
-      }),
-    });
+    try {
+      const response = await fetch("/api/settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          theme: darkMode ? "dark" : "light",
+          notifications,
+          emailAlerts,
+        }),
+      });
 
-    setTimeout(() => {
-      setSaved(false);
-    }, 2000);
+      if (!response.ok) throw new Error("Unable to save settings.");
+      setSaved(true);
+      window.setTimeout(() => setSaved(false), 2000);
+    } catch (error) {
+      setSaveError(
+        error instanceof Error ? error.message : "Unable to save settings.",
+      );
+    }
   };
 
   return (
@@ -277,14 +292,14 @@ export default function SettingsPage() {
           <div>
             <label className="text-xs opacity-60">Name</label>
             <div className="mt-1 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-3">
-              WAEC Administrator
+              {profile.fullName}
             </div>
           </div>
 
           <div>
             <label className="text-xs opacity-60">Email</label>
             <div className="mt-1 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-3">
-              admin@waec.gov.ng
+              {profile.email || "No email address"}
             </div>
           </div>
         </div>
@@ -310,6 +325,14 @@ export default function SettingsPage() {
           session.
         </div>
       </Card>
+
+      <p className="text-sm capitalize opacity-60">Role: {profile.role}</p>
+
+      {saveError && (
+        <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+          {saveError}
+        </p>
+      )}
 
       {/* Save */}
       <div className="flex justify-end">
